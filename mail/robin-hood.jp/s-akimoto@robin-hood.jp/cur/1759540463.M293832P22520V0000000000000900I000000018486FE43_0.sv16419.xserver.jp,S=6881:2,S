@@ -1,0 +1,121 @@
+Return-Path: <bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com>
+Delivered-To: s-akimoto@robin-hood.jp
+X-Virus-Status: scanned (With Secure/Atlant/virusgw16021.xserver.jp/)
+Received: from o16789107x114.outbound-mail.sendgrid.net (o16789107x114.outbound-mail.sendgrid.net [167.89.107.114])
+	by sv16419.xserver.jp (Postfix) with ESMTPS id D832C40D086C4
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 10:14:22 +0900 (JST)
+Authentication-Results: sv16419.xserver.jp;
+	dkim=pass header.d=support.chatwork.com header.s=cw header.b=WFmyqwfC;
+	dmarc=pass (policy=none) header.from=chatwork.com;
+	spf=pass (sv16419.xserver.jp: domain of "bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com" designates 167.89.107.114 as permitted sender) smtp.mailfrom="bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com"
+ARC-Seal: i=1; s=default; d=robin-hood.jp; t=1759540463; a=rsa-sha256;
+	cv=none;
+	b=Oit4Sa/uF2qTM2yyN3FaqWYlKzZnKXUUQpPro0u+jc4u1Hy9al1tvjptehlT8DsW4F/GPg
+	lsRVvgkNPOShwuNTceZRKp8pwEsZwWlr0CZt9wSCXrVgxBSbCDZYNF6UnGABKkkCedO3FM
+	RH0S+Uz8T7iM7Bd8MafkN74wM9N5O6vuz2QLwI1kxIsCLdlrdHOLFkvSAlTwA7b7DQWvH0
+	WBLxFHhIWswP+VCfTZ0LtG3YqVh/aF/dRExtx2WVEkWo16XdXy/qhW7ozNyHHKP3liXwh4
+	7NPtTAjd9FgQBhrbzFOUYHcOanZrb+FFPNd9UzPfOPmbDUW/cp5sLEm8TlsXug==
+ARC-Authentication-Results: i=1;
+	sv16419.xserver.jp;
+	dkim=pass header.d=support.chatwork.com header.s=cw header.b=WFmyqwfC;
+	dmarc=pass (policy=none) header.from=chatwork.com;
+	spf=pass (sv16419.xserver.jp: domain of "bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com" designates 167.89.107.114 as permitted sender) smtp.mailfrom="bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com"
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=robin-hood.jp;
+	s=default; t=1759540463;
+	h=from:from:sender:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:in-reply-to:
+	 references:dkim-signature; bh=KBQ8oQ4pXdcUpju9pN7oAwBQcdaTjXhWIdeZ5pBggIc=;
+	b=W5FpYaRo3U7AQ3iEzv40wBG6RHaAR8Nvca5BtBT2LHSSyZzWAN5pxl8sIjzFkkAtqt5118
+	vTAtyvtlz389z9zT1zEuYKHS0mmbgV5Eg8VWPUSXl90UQbK3a2Q7tVKPI8zD0VnPlzFR8c
+	5+yqC4qxRZzlXVOhA+pEMYzP0MGzVK8vGII9Mu+W5JbkRz650QdGGO3G6A1ZEEAQpI+Amf
+	dPZTcynYcEWx+WRBq7U+S8ud5x+SUnyezvr4lw6Gq8C9cicYbSiJUAAP8uJ0vN+z2OLmD9
+	a2hA735lra1LUzuVj43kJkD9QLvLQxLCpdT6fmVsMohs/xzmCC6zSH6Bdtn1cg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=support.chatwork.com;
+	h=subject:date:from:mime-version:to:content-transfer-encoding:
+	content-type:cc:content-type:date:from:subject:to;
+	s=cw; bh=KBQ8oQ4pXdcUpju9pN7oAwBQcdaTjXhWIdeZ5pBggIc=;
+	b=WFmyqwfC2bavsBjllBkjdF3N/AciQZOfvKL/2kJdKhdjxmnpoYX8+Vm9zIRPlzN2rOwV
+	RSnCxPvBPZ0V/BpKJpcSmzqMk0kdOTgdHHts5yXkyTKRTuk6D9VyIfIy2DB6rsRsG6OR+A
+	IPWTXVsGA6/vYmvC8NWpeAOZfw8CY/UvQNPs74qpGZGLlHCBR0D9I2yeqtdzhkd2HwAF0w
+	SDAOxQZrJGVGkDNQV9Q3/lv0zorxH1zfhGU2zrta/SLlUWJFsz+G0tt4fkAwMePyU8J6+M
+	eVswPNn3okbBdIZ7WM/KtKsCdZDI8fzUYEPxasmuqPxN5+OUzLaeQYFjxXb8KH5Q==
+Received: by recvd-555fbdc5b7-pmnzl with SMTP id recvd-555fbdc5b7-pmnzl-1-68E074EC-4E
+	2025-10-04 01:14:20.882531057 +0000 UTC m=+10484981.984633672
+Received: from postfix-server-0.localdomain (unknown)
+	by geopod-ismtpd-9 (SG) with ESMTP id OS3fA9lGSsqhrb6E0LLzbg
+	for <s-akimoto@robin-hood.jp>; Sat, 04 Oct 2025 01:14:20.688 +0000 (UTC)
+Received: from postfix-daemon-jmgdv.localdomain (10-2-157-205.postfix-daemon.postfix.svc.cluster.local [10.2.157.205])
+	by postfix-server-0.localdomain (Postfix) with ESMTP id D9034420002
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 01:14:19 +0000 (UTC)
+Received: from localhost (10-2-139-221.chatwork-web-php.chatwork-web.svc.cluster.local [10.2.139.221])
+	by postfix-daemon-jmgdv.localdomain (Postfix) with ESMTP id C63EFA004888
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 01:14:19 +0000 (UTC)
+Subject: 
+ =?UTF-8?B?44CQQ2hhdHdvcmvjgJHjg63jgrDjgqTjg7Pjg5Hjgrnjg6/jg7zjg4nlho3oqK3lrprjga7norroqo0=?=
+Date: Sat, 04 Oct 2025 01:14:20 +0000 (UTC)
+From: Chatwork <info@support.chatwork.com>
+Message-ID: <aa9e3693ffb1e7315ddb440277507ad6@www.chatwork.com>
+X-Priority: 3
+X-Mailer: PHPMailer [version 1.73/EC Framework v0.90]
+X-CW-ERROR-BACKUP: 68e074ebc086f
+MIME-Version: 1.0
+X-SG-EID: 
+ =?us-ascii?Q?u001=2E1vKvuwPlZ2S=2FMvsrUSquHoHtL4EQjwsG54gnuVvDkbr6bsUdIXM=2F=2FLMAp?=
+ =?us-ascii?Q?Pr+RDiCV7wpvYOLaohSfikcWv7rTpcf+JsFmKvA?=
+ =?us-ascii?Q?Z3tp9HkAwPT1ouPB2=2F4AHwgtumzKttpY8HUL+ZK?=
+ =?us-ascii?Q?vKyXjTvlF4L9A+9zkKbPv3IlkK97rD4WRVH18gm?=
+ =?us-ascii?Q?oPqTs98vE=2F6A=2FA8jfUi7e7RnQdlWzXx2ABmkBSY?=
+ =?us-ascii?Q?b5a2t=2Fef3Wj3DX5+ru4JGH8ptvS9JAz4nK7OwZQ?= =?us-ascii?Q?URcr?=
+X-SG-ID: 
+ =?us-ascii?Q?u001=2ESdBcvi+Evd=2FbQef8eZF3BheT=2F47Geh2+glvj9VdAH776+LTFDjuVA5JZN?=
+ =?us-ascii?Q?5B+ciq3wgmAYsSjkJjBMn=2FFZzdq9A=3D=3D?=
+To: s-akimoto@robin-hood.jp
+X-Entity-ID: u001.jXG1I5kc1O9grnCcw12EIA==
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+XSRV-Filter: s-akimoto@robin-hood.jp
+
+秋元秀太郎
+秋元秀太郎 様
+ 
+いつもお世話になっております。
+Chatwork サポートデスクです。
+
+
+Chatworkログインパスワード再設定方法についてお知らせいたします。
+
+──────────────────────────────
+◆ パスワードの再設定について
+──────────────────────────────
+
+下記のアドレスにアクセスしますと、パスワードの再設定をおこなえます。
+
+https://www.chatwork.com/service/passremind_set.php?p=cca0142aad1fd2f98714ba1fd410928562202e5f050d84c4b387d0954b2b27c3&lang=ja&d=1
+
+※上記のアドレスは3時間経過いたしますと無効になります。
+パスワード再発行の手続きにお心当たりの無い場合は
+このメールを破棄していただきますようお願い申し上げます。
+──────────────────────────────
+
+
+何かご不明な点がありましたら、下記の「よくある質問」をご覧ください。
+
+Chatwork - よくある質問
+https://help.chatwork.com/hc/ja/
+
+
+※本メールにお心あたりがない場合は、お手数ですが
+このままメールを破棄いただきますようお願いします。
+
+※このメールアドレスは送信専用です。返信はおこなっておりません。
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+┃株式会社kubell
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ URL：https://go.chatwork.com/ja/
+ お問い合わせ：https://help.chatwork.com/hc/ja
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+

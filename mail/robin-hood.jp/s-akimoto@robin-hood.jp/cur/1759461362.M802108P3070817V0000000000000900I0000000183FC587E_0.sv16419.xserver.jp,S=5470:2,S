@@ -1,0 +1,89 @@
+Return-Path: <n-tadaki@yamauchi-jidousha.com>
+Delivered-To: s-akimoto@robin-hood.jp
+X-Virus-Status: scanned (With Secure/Atlant/virusgw16021.xserver.jp/)
+Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
+	by sv16419.xserver.jp (Postfix) with ESMTPS id E2C5B417EFD98
+	for <s-akimoto@robin-hood.jp>; Fri,  3 Oct 2025 12:16:01 +0900 (JST)
+Authentication-Results: sv16419.xserver.jp;
+	dkim=pass header.d=yamauchi-jidousha-com.20230601.gappssmtp.com header.s=20230601 header.b=pNunZaLs;
+	dmarc=pass (policy=none) header.from=yamauchi-jidousha.com;
+	spf=pass (sv16419.xserver.jp: domain of n-tadaki@yamauchi-jidousha.com designates 209.85.208.179 as permitted sender) smtp.mailfrom=n-tadaki@yamauchi-jidousha.com
+ARC-Seal: i=1; s=default; d=robin-hood.jp; t=1759461362; a=rsa-sha256;
+	cv=none;
+	b=RpRYcoMHJmF8Ynxo2+LGa25zcbSIPZetBuhhyzqLGWNQk+LvSefoZ7v5zBoCbtQ1+g0lQk
+	yKbnwBb/m7fOGr788F5W27uR6i1807LrC2e6Skdooy16vtrh3tQ+vdWFOdmlvvDEW6Ldm5
+	1lCdbIkZzmus9iDHVAj5bSpPV3Dlu5+oxwQ1yrcYjjRobnOYJ+hRmhBp1/zPnyktYg1fYO
+	lOd7CujE4AWWxnTjvMi+OtdqrxGjwHPZPo1n5BV1hzMX7+H/AZYAiopAiUY+Azk8uK4nPN
+	DraePXln7UdRVHLYHe9HmkEDGDefb2B8BrEr9tghT6YOUvxhmoTxAfivcSkDSQ==
+ARC-Authentication-Results: i=1;
+	sv16419.xserver.jp;
+	dkim=pass header.d=yamauchi-jidousha-com.20230601.gappssmtp.com header.s=20230601 header.b=pNunZaLs;
+	dmarc=pass (policy=none) header.from=yamauchi-jidousha.com;
+	spf=pass (sv16419.xserver.jp: domain of n-tadaki@yamauchi-jidousha.com designates 209.85.208.179 as permitted sender) smtp.mailfrom=n-tadaki@yamauchi-jidousha.com
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=robin-hood.jp;
+	s=default; t=1759461362;
+	h=from:from:sender:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:mime-version:mime-version:
+	 content-type:content-type:content-transfer-encoding:in-reply-to:
+	 references:dkim-signature; bh=qmnoT7AcalnCJ8qP2mP7Zy9PGnysfiDK/V4IzV9osWg=;
+	b=InLtpstBnAo4uHfHWj7U90RhrCsvcUblr0EtyHzXx1iu1W/FGz4gokS2t+2DrcKV5w5eEU
+	crmmxIudKJOXVmV+d5QkK2JQb/7G0BnRK4Q/9jJabn7dNwPaHw87W4A5CffeFhpVZ8GlbO
+	bPbxV2V/IFAGZFbEj3SPF1BI6Dxna1pH4uInj57+JsQLReUrCflbHg7Qs+T35J7WneozHZ
+	CRXTBzIV/RfVBCikjWKPFMT9hdZQODS7Wuo8PIlj7W1UUOkWExe39zJE9JM8bGUFgdGJ0z
+	ScVcO4+Q+x9SosGur+A9twy8a7nhfi0HnyFQD9OPUw7Yn3yU0t+Jne4spw7FOQ==
+Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-3737d0920e6so19539241fa.1
+        for <s-akimoto@robin-hood.jp>; Thu, 02 Oct 2025 20:16:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=yamauchi-jidousha-com.20230601.gappssmtp.com; s=20230601; t=1759461359; x=1760066159; darn=robin-hood.jp;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=qmnoT7AcalnCJ8qP2mP7Zy9PGnysfiDK/V4IzV9osWg=;
+        b=pNunZaLsZ6cYTPYzuHv5TAk+of4+52vsleF8znYQxBl/zVfOeTPHzNLvzd/aNKK/jM
+         IqA6nI/mGrCNmrQWudKS3VyVSmiUhZsHlY2/Fba0pYUJ2VyTtX81gNVMRVOiPT1la0Am
+         WZUW/pniMxBmkbAUmceUyOa81J0PsTq7tJANmVqZgnR9xclDGYvwVvqp+btDHALSjYcT
+         jkoLfqMgyj35gi1tyzDjruRLO5m8qx9Zp4FQ0GK62K0VyDf929CWzKBA+3Goaa3hPuBX
+         e/kjBxuing9M0/N5sHfwOQHxJit7WsjGb1JWe0wksNhRTsGynvTwHts9fMk9n+nmx6iZ
+         T7yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1759461359; x=1760066159;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=qmnoT7AcalnCJ8qP2mP7Zy9PGnysfiDK/V4IzV9osWg=;
+        b=DC52Z1MeqLNjMVgZDzVugr/tD3q+Ko7R0bOWihP2jOrM0wARINrQJnzt3N/E2X9dzk
+         miJ4xHHTGpBWOMgCBboxpuasd9yX7M8pt4ZKmvTGF0Q5iWF7xplf1AavErN2DyHSxvV1
+         8/A7f/5A9ta1Fj9Oq3V+78L+6PlZ7heG8PyBwKWKrBekOdIfy+mTapRyHUh1npF/eNlL
+         CSrZ1Z54knVEtvQJsorYWyvSralaVgJItMzYRBcsj3Lfkv8wPrU3GC5671ttd8pVHMYX
+         QQzYbTa6eyOGn3Fj6Zf3XjWgPt5yr53J0oV3uS98hFsdyVsTV4RvqcWJ7ARyu3ennwF4
+         7aiQ==
+X-Gm-Message-State: AOJu0Yz+m/ZrvfdAINKHGWypQtDVYWBtvyS+x3HIDhxCEpPoYIkHYga6
+	hzf47Q08XpL7KW5bqPun8pgbq8adLx5uxESu7LQM6hoIiitbPfUob/4ODRdy7v1+FohzZNIEWiJ
+	1xqkiu46Yio5deD6S7+s422tbZCVaSSafRjmVi7KUhFyw/oPxxgiyk14A
+X-Gm-Gg: ASbGnctTxTPHdvirSoBp8sjKvYaJqCzI83VAo6VSEf85AgqzVT0ALCCFS09yWcvavZe
+	0AopKn9q9fq/tIBBgmRE1Od4p4kEFMFRzPoazIzFydsJrhs2op/DF6tIq9IY8tA33D1j9DIdNqo
+	a2oOcGyNa+4la2/GpBsT6r1k9PWJgP40LV1VoXj8oqfsgbw7X6AmjrWrs+D/RJk81roBIvfjBRL
+	20zxfoSI3lmIlhTBY+S/Et2f8+BPg==
+X-Google-Smtp-Source: AGHT+IF3moz3BbeC7+ToLKNmcNjGhfhZ1Hb1CqBn0758EoaM2enur8N6m0nfdAHWqDkw7HUnYvwHGzeJRzO2hzcRTj4=
+X-Received: by 2002:a05:651c:2119:b0:36a:4ee2:24b9 with SMTP id
+ 38308e7fff4ca-374c371bfacmr3773491fa.12.1759461358385; Thu, 02 Oct 2025
+ 20:15:58 -0700 (PDT)
+MIME-Version: 1.0
+From: =?UTF-8?B?5YaF6Jek5b+g5qi5?= <n-tadaki@yamauchi-jidousha.com>
+Date: Fri, 3 Oct 2025 12:15:52 +0900
+X-Gm-Features: AS18NWBNaXbUMsK9ED1F3Q9nXokrBgEfzt6jaom-9oqXz8KQzHr5VoVIvixx4iM
+Message-ID: <CAA1anMP=VDg=Vf55-iY=pDDvuWfUhow0nOdRa24-fDD=tdZn6Q@mail.gmail.com>
+Subject: =?UTF-8?B?44OG44K544OI6YCB5L+h?=
+To: s-akimoto@robin-hood.jp
+Content-Type: multipart/alternative; boundary="000000000000434fbe0640388571"
+XSRV-Filter: s-akimoto@robin-hood.jp
+
+--000000000000434fbe0640388571
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+44OG44K544OI6YCB5L+hDQo=
+--000000000000434fbe0640388571
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+PGRpdiBkaXI9Imx0ciI+44OG44K544OI6YCB5L+hPGRpdj48YnI+PC9kaXY+PC9kaXY+DQo=
+--000000000000434fbe0640388571--

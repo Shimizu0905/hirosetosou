@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="533" height="96" viewBox="0 0 533 96">
+  <defs>
+    <filter id="吹き出し" x="0" y="0" width="533" height="96" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#吹き出し)">
+    <path id="吹き出し-2" data-name="吹き出し" d="M30,78A30,30,0,0,1,0,48V30A30,30,0,0,1,30,0H466.848a30,30,0,0,1,30,30V48a30.272,30.272,0,0,1-.263,3.991L515,57.917s-2.945,2.021-12.569,1.693a43.49,43.49,0,0,1-7.53-.952A30.013,30.013,0,0,1,466.848,78Z" transform="translate(9 6)" fill="#fff"/>
+  </g>
+</svg>

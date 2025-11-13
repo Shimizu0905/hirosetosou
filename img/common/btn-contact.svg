@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="558" height="163" viewBox="0 0 558 163">
+  <defs>
+    <filter id="長方形_9" x="0" y="0" width="558" height="163" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.361"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="グループ_49" data-name="グループ 49" transform="translate(-7497 -1915)">
+    <g transform="matrix(1, 0, 0, 1, 7497, 1915)" filter="url(#長方形_9)">
+      <rect id="長方形_9-2" data-name="長方形 9" width="540" height="145" transform="translate(9 6)" fill="#1a8017"/>
+    </g>
+    <text id="今すぐ無料見積もりを申し込む" transform="translate(7552 2007)" fill="#fff" font-size="32" font-family="NotoSansJP-Bold, Noto Sans JP" font-weight="700"><tspan x="0" y="0">今</tspan><tspan y="0">すぐ</tspan><tspan y="0">無料見積</tspan><tspan y="0">もりを</tspan><tspan y="0">申</tspan><tspan y="0">し</tspan><tspan y="0">込</tspan><tspan y="0">む</tspan></text>
+  </g>
+</svg>

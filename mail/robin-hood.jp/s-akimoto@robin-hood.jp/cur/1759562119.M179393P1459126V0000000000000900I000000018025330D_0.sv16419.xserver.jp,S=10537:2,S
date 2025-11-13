@@ -1,0 +1,221 @@
+Return-Path: <noreply@linecorp.com>
+Delivered-To: s-akimoto@robin-hood.jp
+X-Virus-Status: scanned (With Secure/Atlant/virusgw16021.xserver.jp/)
+Received: from mta031.ssk.gm.yahoo.co.jp (mta031.ssk.gm.yahoo.co.jp [182.22.20.47])
+	by sv16419.xserver.jp (Postfix) with ESMTPS id 148913F5B9D98
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 16:15:19 +0900 (JST)
+Authentication-Results: sv16419.xserver.jp;
+	dkim=pass header.d=linecorp.com header.s=2024062801.gm header.b=AG8Hi6NT;
+	dmarc=pass (policy=quarantine) header.from=linecorp.com;
+	spf=pass (sv16419.xserver.jp: domain of noreply@linecorp.com designates 182.22.20.47 as permitted sender) smtp.mailfrom=noreply@linecorp.com
+ARC-Seal: i=1; s=default; d=robin-hood.jp; t=1759562119; a=rsa-sha256;
+	cv=none;
+	b=Q/JiMJlmhIrwf023Z/HWyOmB3a0asQVvvWckQ0lmtMU4IoxSmbZcoPpNgLUl9ZsPQ3KWnQ
+	PrfhNb5eZH9IAhvSP4JZv08AP1+d4Q8n2OdRU599vRemile789mnSxRZn7rKunz5bU6l/Q
+	0YlLDvnqJjrPSj5IiuCZJf/8z8FoCSHxwsWOng4Icj/EtMAXUwV7nNKn6yBBnbF5DQHf+F
+	z/urHSEQaHLmMnu0qKwEkSx3qHkkj42o9nA1J0B+TRqBsObk5M0bV9rL/+6sw+YQpSi3CD
+	Ftc7/NV3j34IxzMUcJx59n2+LlIGS0lV+UXdr4wy3rtcYmFJ/6+lAnP3/k8r7g==
+ARC-Authentication-Results: i=1;
+	sv16419.xserver.jp;
+	dkim=pass header.d=linecorp.com header.s=2024062801.gm header.b=AG8Hi6NT;
+	dmarc=pass (policy=quarantine) header.from=linecorp.com;
+	spf=pass (sv16419.xserver.jp: domain of noreply@linecorp.com designates 182.22.20.47 as permitted sender) smtp.mailfrom=noreply@linecorp.com
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=robin-hood.jp;
+	s=default; t=1759562119;
+	h=from:from:sender:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:in-reply-to:
+	 references:dkim-signature; bh=hjkaKXr/qYjFx50J3FkSpN1zTsz9wiIqdYjySbI9Xfw=;
+	b=PWtCLwuJLlJGnDG4XKBE9nA0F/GObtLWarcHksRTmGzOfbK0A39wC2yIYbkPry+I0tpbXV
+	SlG+gOXAJ5SNkPL6BrPzLoazBrislJgbAoujRJJvtprEdedc4NgAfEB8e6WmIttc1ABvtu
+	l/seqA3yJTHn9du9/vO00tKz3r+YSZT6KDvMlmgq374/vwbb2UHthxW2eg++O4j0EnQWZs
+	yWS2JWpEXhM2ca/LZ+/DCkbGI1xo2h/205h4tnTxptnIfM5kFkrZNc+rWTlCZyuxYoVwql
+	YBcnCn5DSejqc9viLhKo5bCAklJvN4BQv6q/b1HAHxK2d5CoIb6RaLfxKVMMvQ==
+Received: from smtp-gw-f06h02c01.prod.goats.ssk.ynwl.yahoo.co.jp (smtp-gw-f06h02c01.prod.goats.ssk.ynwl.yahoo.co.jp [100.77.164.100])
+	by mta031.ssk.gm.yahoo.co.jp (Postfix) with ESMTPS id 4cdxd26M5Jz2xw9
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 16:15:18 +0900 (JST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linecorp.com;
+	s=2024062801.gm; t=1759562118;
+	bh=hjkaKXr/qYjFx50J3FkSpN1zTsz9wiIqdYjySbI9Xfw=;
+	h=Date:From:To:Subject;
+	b=AG8Hi6NTT1wsb+a7lHggwi3ohAq4UjXTHrS+Om4X+dd9kpvr8c5edYqzu1nFHGlmb
+	 p28yWDKZQ0dMA8TpgTTpDJLm3y8il8POUWFKdE7nt9dqM5NHwA6odMMQMV9LvkXK+6
+	 D1TxMSaBHDrvBLJdYUQbPLh1eNDzcJM+SdP4dx/CWPH8k26eOQoQEaEFxsWCu4xwi+
+	 BRsIKp0DYhfog8QAv1LzP6IC25TZ3/0VCnUcz16HfT1lLJLDZEiMe5a3CGfhDhWWv/
+	 kPd3oiDXUhHaLm9T+zmqchYkgVMDPmTHiMQ7zBSHf5zhSg11Rs7iYCXc6pvYpOY/8B
+	 7Lex/3vKqCLxQ==
+Date: Sat, 4 Oct 2025 16:15:18 +0900 (JST)
+From: LY Corporation <noreply@linecorp.com>
+To:  <s-akimoto@robin-hood.jp>
+Message-ID: <server004.552.1759562118767.343@njmailer.linecorp.com>
+Subject: =?UTF-8?B?NzYwMDEy77yaW+ODk+OCuOODjQ==?=
+ =?UTF-8?B?44K5SURdIOODreOCsOOCpOODs+OCs+ODvOODiQ==?=
+MIME-Version: 1.0
+Content-Type: text/html;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Delivery-Control: yes
+Feedback-ID: noreply-Template6952:noreply::LY-NJMailer
+X-Yahoo-Newman-Property: njmailer
+X-Yahoo-Newman-Id: server004-552-1759562118767-343
+XSRV-Filter: s-akimoto@robin-hood.jp
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org=
+/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns=3D"http://www.w3.org/1999/xhtml">
+<head style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,sans-=
+serif;margin:0;padding:0">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width"
+        style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,san=
+s-serif;margin:0;padding:0">
+  <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8"
+        style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,san=
+s-serif;margin:0;padding:0">
+  <title style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,sa=
+ns-serif;margin:0;padding:0">
+    Email</title></head>
+<body bgcolor=3D"#FFFFFF"
+      style=3D"-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:=
+none;font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,sans-serif;heig=
+ht:100%;margin:0;padding:0;width:100%!important">
+<style
+  style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,sans-seri=
+f;margin:0;padding:0">@media only screen and (max-width: 600px) {
+  a[class=3Dbtn] {
+    display: block !important;
+    margin-bottom: 10px !important;
+    background-image: none !important;
+    margin-right: 0 !important
+  }
+
+  div[class=3Dcolumn] {
+    width: auto !important;
+    float: none !important
+  }
+
+  table.social div[class=3Dcolumn] {
+    width: auto !important
+  }
+}</style>
+<table class=3D"head-wrap"
+       style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,sans=
+-serif;margin:0;padding:0;width:100%">
+  <tbody>
+  <tr style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,sans-=
+serif;margin:0;padding:0">
+    <td class=3D"header container"
+        style=3D"clear:both!important;display:block!important;font-family:'=
+Helvetica Neue',Helvetica,Helvetica,Arial,sans-serif;margin:0 auto!importan=
+t;max-width:600px!important;padding:0;word-break:break-all">
+      <div class=3D"content"
+           style=3D"display:block;font-family:'Helvetica Neue',Helvetica,He=
+lvetica,Arial,sans-serif;margin:0 auto;max-width:600px;padding:15px">
+        <table
+          style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,s=
+ans-serif;margin:0;padding:0;width:100%">
+          <tbody>
+          <tr style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Ari=
+al,sans-serif;margin:0;padding:0">
+            <td style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,A=
+rial,sans-serif;margin:0;padding:0;text-align:center">
+              <img src=3D"https://static.line-scdn.net/5/biz-account/19757e=
+95c67/ly_business_id_logo.png" alt=3D"LINE=E3=83=A4=E3=83=95=E3=83=BC Busin=
+ess ID"
+                   width=3D"211" height=3D"62"
+                   style=3D"font-family:'Helvetica Neue',Helvetica,Helvetic=
+a,Arial,sans-serif;margin:0;max-width:100%;padding:0">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<table class=3D"body-wrap"
+       style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,sans=
+-serif;margin:0;padding:0;width:100%">
+  <tbody>
+  <tr style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,sans-=
+serif;margin:0;padding:0">
+    <td style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,san=
+s-serif;margin:0;padding:0"></td>
+    <td class=3D"container" bgcolor=3D"#FFFFFF"
+        style=3D"clear:both!important;display:block!important;font-family:'=
+Helvetica Neue',Helvetica,Helvetica,Arial,sans-serif;margin:0 auto!importan=
+t;max-width:600px!important;padding:0;word-break:break-all">
+      <div class=3D"content"
+           style=3D"display:block;font-family:'Helvetica Neue',Helvetica,He=
+lvetica,Arial,sans-serif;margin:0 auto;max-width:600px;padding:15px">
+        <table
+          style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,s=
+ans-serif;margin:0;padding:0;width:100%">
+          <tbody>
+          <tr style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Ari=
+al,sans-serif;margin:0;padding:0">
+            <td style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,A=
+rial,sans-serif;margin:0;padding:0"><p
+              style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Ari=
+al,sans-serif;font-size:14px;font-weight:400;line-height:1.6;margin:0;margi=
+n-bottom:10px;padding:0">
+              =E3=83=93=E3=82=B8=E3=83=8D=E3=82=B9ID=E3=83=AD=E3=82=B0=E3=
+=82=A4=E3=83=B3=E3=82=B3=E3=83=BC=E3=83=89=EF=BC=9A760012<br /><br />=E4=B8=
+=8A=E8=A8=98=E3=81=AE=E3=83=AD=E3=82=B0=E3=82=A4=E3=83=B3=E3=82=B3=E3=83=BC=
+=E3=83=89=E3=82=92=E3=83=AD=E3=82=B0=E3=82=A4=E3=83=B3=E7=94=BB=E9=9D=A2=E3=
+=81=A7=E5=85=A5=E5=8A=9B=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=
+=84=E3=80=82=E3=83=AD=E3=82=B0=E3=82=A4=E3=83=B3=E3=82=B3=E3=83=BC=E3=83=89=
+=E3=81=AE=E6=9C=89=E5=8A=B9=E6=9C=9F=E9=99=90=E3=81=AF10=E5=88=86=E3=81=A7=
+=E3=81=99=E3=80=82</p><br
+              style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Ari=
+al,sans-serif;margin:0;padding:0"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </td>
+    <td style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,san=
+s-serif;margin:0;padding:0"></td>
+  </tr>
+  </tbody>
+</table>
+<table class=3D"footer-wrap"
+       style=3D"clear:both!important;font-family:'Helvetica Neue',Helvetica=
+,Helvetica,Arial,sans-serif;margin:0;padding:0;width:100%">
+  <tbody>
+  <tr style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,sans-=
+serif;margin:0;padding:0">
+    <td style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,san=
+s-serif;margin:0;padding:0"></td>
+    <td class=3D"container"
+        style=3D"clear:both!important;display:block!important;font-family:'=
+Helvetica Neue',Helvetica,Helvetica,Arial,sans-serif;margin:0 auto!importan=
+t;max-width:600px!important;padding:0;word-break:break-all">
+      <div class=3D"content"
+           style=3D"display:block;font-family:'Helvetica Neue',Helvetica,He=
+lvetica,Arial,sans-serif;margin:0 auto;max-width:600px;padding:15px">
+        <table
+          style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,s=
+ans-serif;margin:0;padding:0;width:100%">
+          <tbody>
+          <tr style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Ari=
+al,sans-serif;margin:0;padding:0">
+            <td style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,A=
+rial,sans-serif;margin:0;padding:0"><p
+              class=3D"text-muted"
+              style=3D"color:#888;font-family:'Helvetica Neue',Helvetica,He=
+lvetica,Arial,sans-serif;font-size:14px;font-weight:400;line-height:1.6;mar=
+gin:0;margin-bottom:10px;padding:0">
+              =C2=A9 LY Corporation</p></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </td>
+    <td style=3D"font-family:'Helvetica Neue',Helvetica,Helvetica,Arial,san=
+s-serif;margin:0;padding:0"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

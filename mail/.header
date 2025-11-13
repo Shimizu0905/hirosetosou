@@ -1,0 +1,8 @@
+if ( ! ( /^XSRV\-Filter: $LOGNAME$/ ) )
+{
+        xfilter "/usr/bin/reformail -A \"XSRV-Filter: $LOGNAME\""
+}
+else
+{
+        to "./"
+}

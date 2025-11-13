@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="438" height="154" viewBox="0 0 438 154">
+  <defs>
+    <filter id="吹き出し" x="0" y="0" width="438" height="154" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="グループ_36" data-name="グループ 36" transform="translate(-7000 -2425)">
+    <g id="グループ_35" data-name="グループ 35">
+      <g id="グループ_34" data-name="グループ 34" transform="translate(5869 -67)">
+        <g transform="matrix(1, 0, 0, 1, 1131, 2492)" filter="url(#吹き出し)">
+          <path id="吹き出し-2" data-name="吹き出し" d="M30,136A30,30,0,0,1,0,106V30A30,30,0,0,1,30,0H375.2a30,30,0,0,1,30,30v3.075a17.012,17.012,0,0,1,4.552-1.01C417.6,31.494,420,35.016,420,35.016L405.2,45.2V106a30,30,0,0,1-30,30Z" transform="translate(429 142) rotate(180)" fill="#fff"/>
+        </g>
+        <text id="塗り替えの時期かわからないが" transform="translate(1189 2559)" font-size="24" font-family="NotoSansJP-Regular, Noto Sans JP"><tspan x="0" y="0">塗</tspan><tspan y="0">り</tspan><tspan y="0">替</tspan><tspan y="0">えの</tspan><tspan y="0">時期</tspan><tspan y="0">かわからないが</tspan></text>
+        <text id="相談する人がいない_" data-name="相談する人がいない…" transform="translate(1189 2594)" fill="#9a3333" font-size="24" font-family="NotoSansJP-Bold, Noto Sans JP" font-weight="700"><tspan x="0" y="0">相談</tspan><tspan y="0">する</tspan><tspan y="0">人</tspan><tspan y="0">がいない…</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

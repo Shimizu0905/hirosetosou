@@ -1,0 +1,112 @@
+Return-Path: <support@cis6200.jp>
+Delivered-To: s-akimoto@robin-hood.jp
+X-Virus-Status: scanned (With Secure/Atlant/virusgw16021.xserver.jp/)
+Received: from v0400-019.mailsecure.jp (v0400-019.mailsecure.jp [203.138.96.19])
+	by sv16419.xserver.jp (Postfix) with ESMTPS id 6BBBE454F89F3
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 09:18:12 +0900 (JST)
+Authentication-Results: sv16419.xserver.jp;
+	dkim=none;
+	dmarc=none;
+	spf=pass (sv16419.xserver.jp: domain of support@cis6200.jp designates 203.138.96.19 as permitted sender) smtp.mailfrom=support@cis6200.jp
+ARC-Seal: i=1; s=default; d=robin-hood.jp; t=1759537092; a=rsa-sha256;
+	cv=none;
+	b=Sj45dR3Tp5j4/10EsL1WoBD1J8r8IyWet3nLf5CnxE0TIgT43XhbRi2Jms0r0/U4vtjkx5
+	0Hb1SJKUk4W9gRmWozGnz5Bfvo/lNPljXK8tE1NzkM917wsC2+AG7VMYR1m2ltvboXuF4S
+	rCidmgXOdSLKMGcnEeyJRcv2OCnpTLwVBquoBjxaxjgZacsrO5cx3le7S24yqHfvibZZZ5
+	bxeApNIvzMOdWtOsGbGrWPhGeRLRiW8RDtAwDPDegpwoFdMtH5Om3crJtIAHKEfbjf7V+d
+	YPBpERioDhqmjybjDFsKRQfS2ne4tKG3OGNmAo/yawf1W3h6RNtMuS08h2O7Fw==
+ARC-Authentication-Results: i=1;
+	sv16419.xserver.jp;
+	dkim=none;
+	dmarc=none;
+	spf=pass (sv16419.xserver.jp: domain of support@cis6200.jp designates 203.138.96.19 as permitted sender) smtp.mailfrom=support@cis6200.jp
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=robin-hood.jp;
+	s=default; t=1759537092;
+	h=from:from:sender:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:in-reply-to:
+	 references; bh=x83uRh4khxr2YEH6CS7ycAblHJEjzdmk/rw+xhic2r4=;
+	b=n9DoKVYeog7G/b9gUj0NRUAfm10FTddB73rm3fH+m7RvBYFQGHIO+xziYGj0CdAxIxuyO5
+	g92IxLsJSa8z8w7Uay2EtF/VBRh1/rmcgzC6g1kt2apjdREgg6h/5TUbDtJGz2m1ZL9VzW
+	HEBtykAgks+Iqx2e7UhEj/y0VggdsIeOTu99wzRhkTtW+4iGszZfbJkGv8hD+rDsVYcD/u
+	EyieKgyqXDKOsR6MVPwIyCNQOZGZq0xPXmsJwGGphIUMPb4Oi7UzF7zt4uDoElwmZTAeFd
+	DOD5rhhnJojwG8vuuZ3kUAUxaBx20yq5JE57OfT1q3hYfnr4zoDCnVeMMjHkZQ==
+Received: from security.ussnet.co.jp (unknown [113.35.35.26])
+	(Authenticated sender: support@cis6200.jp)
+	by cis6200.jp (Postfix) with ESMTPA id C379025C8C;
+	Sat,  4 Oct 2025 09:18:11 +0900 (JST)
+Received: from 202207NA158 ([10.105.12.159]) by m-FILTER with ESMTP; Sat, 4 Oct 2025 09:18:11 +0900
+thread-index: Adw0xF3mX3mEqehuTda3KHBieSOMcA==
+Thread-Topic: =?iso-2022-jp?B?GyRCIVobKEJDSVMbJEIhWyQqPz05fiRfJCIkaiQsJEgkJiQ0JDYbKEI=?=
+	=?iso-2022-jp?B?GyRCJCQkXiQ5GyhC?=
+From: <support@cis6200.jp>
+To: <s-akimoto@robin-hood.jp>
+Subject: =?iso-2022-jp?B?GyRCIVobKEJDSVMbJEIhWyQqPz05fiRfJCIkaiQsJEgkJiQ0JDYbKEI=?=
+	=?iso-2022-jp?B?GyRCJCQkXiQ5GyhC?=
+Date: Sat, 4 Oct 2025 09:18:10 +0900
+Message-ID: <B6C66A5DB869465B8E4A79DB94F5EC54@cqnet.local>
+MIME-Version: 1.0
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft CDO for Windows 2000
+Content-Class: urn:content-classes:message
+Importance: normal
+Priority: normal
+X-MimeOLE: Produced By Microsoft MimeOLE
+XSRV-Filter: s-akimoto@robin-hood.jp
+
+A4689-004$B!!M-8B2q<R;3Fb<+F0<V>&2q!!8fCf(B
+
+$B$3$NEY$O!"(BCIS$B$K$*?=9~$_$$$?$@$-!"@?$K$"$j$,$H$&$4$6$$$^$9!#(B
+$B!V$4MxMQ3+;O$^$G$NN.$l!W$H!VCm0U;v9`!W$r$40FFb$$$?$7$^$9!#(B
+
+$B!Z(BCIS$B?75,F~2q?=9~!'$4MxMQ3+;O$^$G$NN.$l![(B
+$B-!J@<R$G$N=`Hw$,?J$_$^$7$?$i!"$47@Ls$N=EMW;v9`$d$4Cm0U$$$?$@$-$?$$E@$r(B
+$B!!$*EEOC$K$F3NG'$5$;$F$$$?$@$-$^$9!#(B
+$B!!"(:.;(>u67$K$h$j!"$4O"Mm$^$G(B2$B=54VDxEY$rMW$9$k>l9g$,$4$6$$$^$9!#(B
+$B-"$*EEOC$G$N3NG'8e!"J@<R$+$i(BUSB$BG'>Z%-!<$d%Q%9%o!<%I>pJs$rAwIU$$$?$7$^$9!#(B
+$B!!(BUSB$BG'>Z%-!<$NH/Aw$r$b$C$F7@LsDy7k$H$J$j!"E~Ce<!Bh(BCIS$B$r$4MxMQ$$$?$@$1$^$9!#(B
+-------------------------------------------------------------------------------------
+
+$B!Z(BCIS$BDI2C7@Ls?=9~!'$4MxMQ3+;O$^$G$NN.$l![(B
+$B!c(BCIS$BEPO?:Q$_8}:B$G$N0zMn$rA*Br$5$l$?>l9g!d(B
+$B-!J@<R$G$N=`Hw$,?J$_$^$7$?$i!"(BUSB$BG'>Z%-!<$NAwIU;~4|$J$I$r(BFAX$B$G$4O"Mm$$$?$7$^$9!#(B
+$B!!(BFAX$B$O$4EPO?$$$?$@$/DI2C7@Ls$NE9J^(BFAX$B$XAw?.$$$?$7$^$9$N$GFbMF$r$43NG'$/$@$5$$!#(B
+$B!!"(DI2C7@Ls?=@A$+$i$4MxMQ3+;O$^$G$K(B1$B=54VDxEY$*;~4V$r$$$?$@$$$F$*$j$^$9!#(B
+$B-"(BFAX$B$G$N$4O"Mm8e!"J@<R$+$i(BUSB$BG'>Z%-!<$d%Q%9%o!<%I>pJs$rAwIU$$$?$7$^$9!#(B
+$B!!(BUSB$BG'>Z%-!<$NH/Aw$r$b$C$F7@LsDy7k$H$J$j!"E~Ce<!Bh(BCIS$B$r$4MxMQ$$$?$@$1$^$9!#(B
+
+$B!c?7$?$KJL8}:B$rEPO?$7$F$N0zMn$rA*Br$5$l$?>l9g!d(B
+$B-!$4F~NO$$$?$@$$$?AwIU@h$K8}:B?6BX0MMj=q$rAwIU$$$?$7$^$9!#(B
+$B-"8}:B?6BX0MMj=q$X$45-F~!&$4Fh0u$$$?$@$-!"(BCIS$B$X$4JVAw$/$@$5$$!#(B
+$B-#8}:B?6BX0MMj=q$,(BCIS$B$XE~Ce8e!"J@<R$G$N=`Hw$,?J$_$^$7$?$i!"(B
+$B!!(BUSB$BG'>Z%-!<$NAwIU;~4|$J$I$r(BFAX$B$G$4O"Mm$$$?$7$^$9!#(B
+$B!!(BFAX$B$O$4EPO?$$$?$@$/DI2C7@Ls$NE9J^(BFAX$B$XAw?.$$$?$7$^$9$N$GFbMF$r$43NG'$/$@$5$$!#(B
+$B!!"(DI2C7@Ls?=@A$+$i$4MxMQ3+;O$^$G$K(B2$B=54VDxEY$*;~4V$r$$$?$@$$$F$*$j$^$9!#(B
+$B-$(BFAX$B$G$N$4O"Mm8e!"J@<R$+$i(BUSB$BG'>Z%-!<$d%Q%9%o!<%I>pJs$rAwIU$$$?$7$^$9!#(B
+$B!!(BUSB$BG'>Z%-!<$NH/Aw$r$b$C$F7@LsDy7k$H$J$j!"E~Ce<!Bh(BCIS$B$r$4MxMQ$$$?$@$1$^$9!#(B
+-------------------------------------------------------------------------------------
+
+$B!Z(BCIS$B?75,F~2q$*$h$SDI2C7@Ls$G$NCm0U;v9`![(B
+$B!c(BCIS$B$N$4MxMQ4D6-$K$D$$$F!d(B
+CIS$BF0:n4D6-$r$43NG'$$$?$@$-!"F0:n4D6-Fb$N%Q%=%3%s$GMxMQ$7$F$/$@$5$$!#(B
+CIS$BF0:n4D6-$N3NG'$O0J2<(BURL$B$+$i$43NG'$/$@$5$$!#(B
+https://www.cisinfo.jp/environment/
+
+$B!c(BCIS$B$N7@Ls4|4V!d(B
+$B7@Ls4|4V$O(B2$BG/$G!"(B2$BG/7P2a8e$O<+F099?7$G$9!#(B
+2$BG/L$K~$GB`2q$5$l$k>l9g$O=jDj$N0cLs6b$,H/@8$7$^$9$N$G$4Cm0U$/$@$5$$!#(B
+
+$B!c7@Ls%-%c%s%;%k$r$44uK>$N>l9g!d(B
+$B$*AaL\$K(BCIS$B%5%]!<%H%;%s%?!<$X$*EEOC$/$@$5$$!#(B
+USB$BG'>Z%-!<H/Aw8e$O!"7@Ls%-%c%s%;%k$,$G$-$^$;$s$N$G$4Cm0U$/$@$5$$!#(B
+
+
+$B0J>e!"$4ITL@$JE@$,$4$6$$$^$7$?$i!"(BCIS$B%5%]!<%H%;%s%?!<$^$G$*Ld9g$;$/$@$5$$!#(B
+$B:#8e$H$b(BCIS$B>pJs%5!<%S%9$r$40&8\$/$@$5$$$^$9$h$&!"59$7$/$*4j$$$$$?$7$^$9!#(B
+$B"((B $BK\%a!<%k$KJV?.$$$?$@$$$F$b(B. $B$4<ALd!&$40MMj$J$I$K$*Ez$($G$-$^$;$s!#$"$i$+$8$a$4N;>5$/$@$5$$!#(B
+
+===============================================
+CIS$B%5%]!<%H%;%s%?!<(B
+Tel$B!'(B0570-064-880 Fax$B!'(B03-5667-0052

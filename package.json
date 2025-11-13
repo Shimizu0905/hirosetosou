@@ -1,0 +1,30 @@
+{
+  "name": "robin-hood",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && npm run copy-assets",
+    "copy-assets": "cp main.js dist/ && cp contact-mail.php dist/ && cp header.html dist/ && cp footer.html dist/ && cp footer-confirm.html dist/ && cp contact-thanks.html dist/ 2>/dev/null || true && mkdir -p dist/img/common && cp -r img/common/* dist/img/common/ 2>/dev/null || true",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sort-css": "node node_modules/postcss-sorting/index.js style.css --config .postcss-sorting.json --write",
+    "lint:css": "stylelint \"**/*.css\" --fix",
+    "lint:css:check": "stylelint \"**/*.css\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-sorting": "^9.1.0",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard": "^39.0.1",
+    "stylelint-order": "^6.0.4",
+    "terser": "^5.44.1",
+    "vite": "^5.4.21"
+  }
+}

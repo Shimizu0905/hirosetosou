@@ -1,0 +1,357 @@
+Return-Path: <bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com>
+Delivered-To: s-akimoto@robin-hood.jp
+X-Virus-Status: scanned (With Secure/Atlant/virusgw16021.xserver.jp/)
+Received: from o16789107x114.outbound-mail.sendgrid.net (o16789107x114.outbound-mail.sendgrid.net [167.89.107.114])
+	by sv16419.xserver.jp (Postfix) with ESMTPS id F16963FE4F23E
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 11:50:35 +0900 (JST)
+Authentication-Results: sv16419.xserver.jp;
+	dkim=pass header.d=support.chatwork.com header.s=cw header.b=kCrhSEqr;
+	dmarc=pass (policy=none) header.from=chatwork.com;
+	spf=pass (sv16419.xserver.jp: domain of "bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com" designates 167.89.107.114 as permitted sender) smtp.mailfrom="bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com"
+ARC-Seal: i=1; s=default; d=robin-hood.jp; t=1759546236; a=rsa-sha256;
+	cv=none;
+	b=oZjXJ4OFsv1xCV9bEOla/Fhnmbpse9VRYHJwhykQC01Co9rAZUg1gAIxv4m5gzizn/W7oF
+	goeeIgP+MY8iMlFBcV3F24znwF/xWd3TJ8mI5OlFnpAuACED677XffjhzeSlt+11uf+WsL
+	kUPfqbXyleuEuWUWRGZmzdRA1i6/utG6HXvmo4H6lzKruh9iM5OWB3l96DSNX2BxQP0pGv
+	RgUaEvLV3ZBYqwhCsreAMrN3y75nTHDmB5WBcj0ke32tyk2bRDwxzoYdyGYjTYn7ptDJw9
+	NeyGiLs3zAj+s4yo8JxqDBSHFCfB2KellG8E8owNNQZK5THwOnZVEDNryLikrQ==
+ARC-Authentication-Results: i=1;
+	sv16419.xserver.jp;
+	dkim=pass header.d=support.chatwork.com header.s=cw header.b=kCrhSEqr;
+	dmarc=pass (policy=none) header.from=chatwork.com;
+	spf=pass (sv16419.xserver.jp: domain of "bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com" designates 167.89.107.114 as permitted sender) smtp.mailfrom="bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com"
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=robin-hood.jp;
+	s=default; t=1759546236;
+	h=from:from:sender:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:mime-version:mime-version:
+	 content-type:content-type:content-transfer-encoding:in-reply-to:
+	 references:dkim-signature; bh=SXTKx3t12TnExOlkbP91/0mW0cAMWGW71ltq/395Ids=;
+	b=eZmS5oleTCUxnc4w9G35xX2uy8Xf7/ONU35rwUwmpGzDKjBwQAJdBKk+xiTOejfgvr6HtJ
+	utOt070WrQm6yGvL9WHpM/rgAYIZ08AZFTyXfJSGEq2NS9a8QpSBXcUl2U9+p6zs+Zbmr1
+	qHX7B/zkGpaBWAQs6pypj9tkEqm3BOkhn82WwpU5nkHPI7q13n0bjN68Olckap3zYzS4Hg
+	nxOeKBU7QWXnvMWfWNEk7TUNC2SDFoHn0DsPlrAz9mpWKAM8VBZLBPwKfRCpnrsauub/Yn
+	zaBoIbGRc7yph41X8aKlXqkuHNYAR+ndfca4/R1MtxrsFQEj+idKJ/F4bzr8kQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=support.chatwork.com;
+	h=from:subject:date:mime-version:to:content-type:cc:content-type:date:
+	from:subject:to;
+	s=cw; bh=SXTKx3t12TnExOlkbP91/0mW0cAMWGW71ltq/395Ids=;
+	b=kCrhSEqrTc8CzISO/L31wji+4ITBs/fYaVXEzaMWreK8+vN9cMgHIVkDrV5Y1WscbIJd
+	38jIdq3h8iUgRU0dUU1PXhVy6YiFavRlX89Vik9jjazhkjOAJwFh+vnnrZPKqnIm7w1W2C
+	ylCl+BU6kiUR3dmNy02FF5MPAyX18+68ELGbPEOnW9v+I1WIkp7pbUp4/Kryi2f4oyLaK/
+	IxyqmiIzYJ5vciStkkVP5inX45BL/04lHpQvUhRiNHQZrLwW7z8IK2Inczo4VY9mA91lGe
+	GoEff+zg7dDDfjmT50hqFTiwy99KnvS4yUIjmmN4xmB/bmHo1UmEjgG/kQo1/zcQ==
+Received: by recvd-57475cd989-mcm8s with SMTP id recvd-57475cd989-mcm8s-1-68E08B79-2C
+	2025-10-04 02:50:33.935097778 +0000 UTC m=+10490783.419228639
+Received: from postfix-external-2.localdomain (unknown)
+	by geopod-ismtpd-15 (SG) with ESMTP id YRXPUMq-SSm_EbIG9jZP7Q
+	for <s-akimoto@robin-hood.jp>; Sat, 04 Oct 2025 02:50:33.717 +0000 (UTC)
+Received: from auth0user.net (ec2-3-114-26-182.ap-northeast-1.compute.amazonaws.com [3.114.26.182])
+	by postfix-external-2.localdomain (Postfix) with ESMTPA id D35FD80002
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 02:50:32 +0000 (UTC)
+From: Chatwork <info@support.chatwork.com>
+Subject: =?UTF-8?B?44CQQ2hhdHdvcmvjgJE=?=
+ =?UTF-8?B?IOiqjeiovOOCs+ODvOODieOBrzczMjA4NuOBp+OBmQ==?=
+Message-ID: <f2ea5e13-f3df-125f-624a-99f255797972@support.chatwork.com>
+Date: Sat, 04 Oct 2025 02:50:33 +0000 (UTC)
+MIME-Version: 1.0
+X-SG-EID: 
+ =?us-ascii?Q?u001=2E1vKvuwPlZ2S=2FMvsrUSquHoHtL4EQjwsG54gnuVvDkbr6bsUdIXM=2F=2FLMAp?=
+ =?us-ascii?Q?Pr+RDiCV7wpvYOLaohSfikcWv7rTsEa+=2FTHsQKa?=
+ =?us-ascii?Q?XiBAiM=2FfzSvlWCPFRixlbPbLRip9cbVkZQP6ViX?=
+ =?us-ascii?Q?0NQ+gk0W4COSSq0W0M1w5oQptbknPIiMz94rlbO?=
+ =?us-ascii?Q?eLXoL6lpgrF9cpuxBenp7YVgTk1vB1xUQDCaFSq?=
+ =?us-ascii?Q?p3abnOExLnoshvKE9I5fHIJRvT+ldRatcvD9hSW?= =?us-ascii?Q?ZjIh?=
+To: s-akimoto@robin-hood.jp
+X-Entity-ID: u001.jXG1I5kc1O9grnCcw12EIA==
+Content-Type: multipart/alternative;
+ boundary="--_NmP-67cac0f2349f4b4f-Part_1"
+XSRV-Filter: s-akimoto@robin-hood.jp
+
+----_NmP-67cac0f2349f4b4f-Part_1
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+
+CgoKCgogIAogICAgCiAgICAgIAogICAgICAgIAogICAgICAgICAgCiAgICAgICAgICAgIAogICAg
+ICAgICAgICAgIAogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgIAogICAgICAgICAg
+ICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAg
+IAogIAoKCiAgICAgICAgICAgICAgICAgICAgICAgIAogIAogICAgCiAgICAgIAogICAgICAgIOiq
+jeiovOOCs+ODvOODieOCkuWFpeWKm+OBl+OBpuODreOCsOOCpOODs+OBl+OBpuOBj+OBoOOBleOB
+hAogICAgICAKICAgIAoKICAgIAogICAgICAKICAgICAgICBDaGF0d29ya+OCkuOBlOWIqeeUqOOB
+hOOBn+OBoOOBjeOAgeiqoOOBq+OBguOCiuOBjOOBqOOBhuOBlOOBluOBhOOBvuOBmeOAggogICAg
+ICAKICAgICAgCiAgICAgICAg5LiL6KiY44Gu6KqN6Ki844Kz44O844OJ44KS5YWl5Yqb44GX44Gm
+44CB44Ot44Kw44Kk44Oz44GX44Gm44GP44Gg44GV44GE44CCCiAgICAgIAogICAgCiAgCgogIAog
+ICAgCiAgICAgIAogICAgICAgIDczMjA4NgogICAgICAKCiAgICAgIOODu+iqjeiovOOCs+ODvOOD
+ieOBruacn+mZkOOBrzXliIbplpPjgafjgZnjgIIKICAgICAg44O75pyf6ZmQ5YaF44Gr44Ot44Kw
+44Kk44Oz44GM5a6M5LqG44Gn44GN44Gq44GE5aC05ZCI44Gv44CB6KqN6Ki844Kz44O844OJ44Gv
+54Sh5Yq544Gr44Gq44KK44CB44Ot44Kw44Kk44Oz55S76Z2i44GL44KJ44KE44KK55u044GX44Gm
+44GE44Gf44Gg44GP5b+F6KaB44GM44GC44KK44G+44GZ44CCCiAgICAgIOODu+iqjeiovOOCs+OD
+vOODieOBruips+e0sOOBr+OAgeODmOODq+ODl+ODmuODvOOCuCAoIGh0dHBzOi8vbC5jaGF0d29y
+ay5jb20vaF9sb2dpbl9hdXRoZW50aWNhdGlvbl9jb2RlX2phICkg44KS44GU56K66KqN44GP44Gg
+44GV44GE44CCCiAgICAgIOODu+OBk+OBruiqjeiovOOCs+ODvOODieOBr+esrOS4ieiAheOBq+aV
+meOBiOOBquOBhOOBp+OBj+OBoOOBleOBhOOAggogICAgCiAgCgogICAgICAgICAgICAgICAgICAg
+ICAgICAKICAKCgogICAgICAgICAgICAgICAgICAgICAgICAKICAKICAgIAogICAgICDkvZXjgYvj
+gZTkuI3mmI7jgarngrnjgYzjgYLjgorjgb7jgZfjgZ/jgonjgIHkuIvoqJjjga7jgIzjgojjgY/j
+gYLjgovos6rllY/jgI3jgpLjgZTopqfjgY/jgaDjgZXjgYTjgIIKICAgIAogICAgCiAgICAgIAog
+ICAgICAgIOagquW8j+S8muekvmt1YmVsbCAtIOOCiOOBj+OBguOCi+izquWVjwogICAgICAgKCBo
+dHRwczovL2hlbHAuY2hhdHdvcmsuY29tL2hjL2phLyApIAogICAgCiAgCgoKICAgICAgICAgICAg
+ICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAKICAgICAg
+ICAgICAgICAgIAoKICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAKICAgICAgICAg
+ICAgICAgICAgICDigLvmnKzjg6Hjg7zjg6vjgavjgYrlv4PjgYLjgZ/jgorjgYzjgarjgYTloLTl
+kIjjga/jgIHjg5jjg6vjg5fjg5rjg7zjgrggKCBodHRwczovL2wuY2hhdHdvcmsuY29tL2hfbWFp
+bF9hdXRoZW50aWNhdGlvbl9jb2RlX2phICkg44KS44GU56K66KqN44GP44Gg44GV44GE44CCCiAg
+ICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICDi
+gLvjgZPjga7jg6Hjg7zjg6vjgqLjg4njg6zjgrnjga/pgIHkv6HlsILnlKjjgafjgZnjgILov5Tk
+v6Hjga/jgYrjgZPjgarjgaPjgabjgYrjgorjgb7jgZvjgpPjgIIKICAgICAgICAgICAgICAgICAg
+CiAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgIAogIOagquW8j+S8muekvmt1YmVsbCAo
+IGh0dHBzOi8vd3d3Lmt1YmVsbC5jb20vICkgCgogICAgICAgICAgICAgIAogICAgICAgICAgICAK
+ICAgICAgICAgIAogICAgICAgIAogICAgICAKICAgIAogIAoKCg==
+
+----_NmP-67cac0f2349f4b4f-Part_1
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+
+<head>
+ =20
+
+ =20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ =20
+ =20
+ =20
+ =20
+
+ =20
+
+  <title>=E8=AA=8D=E8=A8=BC=E3=82=B3=E3=83=BC=E3=83=89=E3=82=92=E3=81=94=E7=
+=A2=BA=E8=AA=8D=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84</title>
+  <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8">
+  <meta name=3D"robots" content=3D"noindex, follow">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1=
+.0">
+  <style>
+    *, ::before, ::after {
+      box-sizing: border-box;
+      border-style: solid;
+      border-width: 0;
+    }
+    html {
+      font-family: HiraKakuStd-W4, Meiryo, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .table-container {
+      width: 545px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <table width=3D"100%" style=3D"width: 100%; height: 100%; background-colo=
+r: #f5f5f4; font-family: HiraKakuStd-W4, Meiryo, sans-serif; line-height: 1=
+.5; color: #333333; border-spacing: 0; border-collapse: collapse;">
+    <tr>
+      <td style=3D"text-align: center;">
+        <table style=3D"border-spacing: 0; border-collapse: collapse;" clas=
+s=3D"table-container">
+          <tbody>
+            <tr>
+              <td style=3D"width: 100%; background-color: #f5f5f4;">
+                <table style=3D"border-spacing: 0; border-collapse: collaps=
+e;">
+                  <tbody>
+                    <tr>
+                      <td style=3D"width: 100%; background-color: #ffffff;"=
+>
+                        <div style=3D"width: 100%; padding: 0;">
+  <img src=3D"https://mail-img.chatwork.com/html_mail/img_chatwork_header.p=
+ng?1759546233" alt=3D"Chatwork" style=3D"width: auto; max-width: 100%; disp=
+lay: block; border: none;">
+</div>
+
+                        <div style=3D"width: 100%; background-color: #fffff=
+f;">
+  <div style=3D"padding: 20px 0">
+    <div style=3D"padding: 0 0 40px;">
+      <h2 style=3D"font-size: 22px; line-height: 1.5; font-weight: bold; ma=
+rgin: 0; text-align: center; color: #333333;">
+        =E8=AA=8D=E8=A8=BC=E3=82=B3=E3=83=BC=E3=83=89=E3=82=92=E5=85=A5=E5=
+=8A=9B=E3=81=97=E3=81=A6=E3=83=AD=E3=82=B0=E3=82=A4=E3=83=B3=E3=81=97=E3=81=
+=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84
+      </h2>
+    </div>
+
+    <div style=3D"padding: 0;">
+      <p style=3D"margin-bottom: 10px; font-size: 16px; line-height: 1.5; t=
+ext-align: center; margin: 0;">
+        Chatwork=E3=82=92=E3=81=94=E5=88=A9=E7=94=A8=E3=81=84=E3=81=9F=E3=
+=81=A0=E3=81=8D=E3=80=81=E8=AA=A0=E3=81=AB=E3=81=82=E3=82=8A=E3=81=8C=E3=81=
+=A8=E3=81=86=E3=81=94=E3=81=96=E3=81=84=E3=81=BE=E3=81=99=E3=80=82
+      </p>
+      <p style=3D"margin-bottom: 10px; font-size: 16px; line-height: 1.5; t=
+ext-align: center; margin: 0;">
+        =E4=B8=8B=E8=A8=98=E3=81=AE=E8=AA=8D=E8=A8=BC=E3=82=B3=E3=83=BC=E3=
+=83=89=E3=82=92=E5=85=A5=E5=8A=9B=E3=81=97=E3=81=A6=E3=80=81=E3=83=AD=E3=82=
+=B0=E3=82=A4=E3=83=B3=E3=81=97=E3=81=A6=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=
+=E3=80=82
+      </p>
+    </div>
+  </div>
+
+  <div style=3D"padding-bottom: 50px;">
+    <div style=3D"width: 70%; margin: 0 auto;">
+      <div style=3D"background-color: #f5f5f5; padding: 20px 0; text-align:=
+ center; font-size: 24px; font-weight: bold; font-family: 'Courier New', mo=
+nospace; letter-spacing: 2px; border-radius: 4px; border: 1px solid #e0e0e0=
+; color: #333333;">
+        732086
+      </div>
+
+      <div style=3D"font-size: 16px; line-height: 1.5; padding-top: 20px; t=
+ext-align: left;">=E3=83=BB=E8=AA=8D=E8=A8=BC=E3=82=B3=E3=83=BC=E3=83=89=E3=
+=81=AE=E6=9C=9F=E9=99=90=E3=81=AF5=E5=88=86=E9=96=93=E3=81=A7=E3=81=99=E3=
+=80=82</div>
+      <div style=3D"font-size: 16px; line-height: 1.5; text-align: left;">=
+=E3=83=BB=E6=9C=9F=E9=99=90=E5=86=85=E3=81=AB=E3=83=AD=E3=82=B0=E3=82=A4=E3=
+=83=B3=E3=81=8C=E5=AE=8C=E4=BA=86=E3=81=A7=E3=81=8D=E3=81=AA=E3=81=84=E5=A0=
+=B4=E5=90=88=E3=81=AF=E3=80=81=E8=AA=8D=E8=A8=BC=E3=82=B3=E3=83=BC=E3=83=89=
+=E3=81=AF=E7=84=A1=E5=8A=B9=E3=81=AB=E3=81=AA=E3=82=8A=E3=80=81=E3=83=AD=E3=
+=82=B0=E3=82=A4=E3=83=B3=E7=94=BB=E9=9D=A2=E3=81=8B=E3=82=89=E3=82=84=E3=82=
+=8A=E7=9B=B4=E3=81=97=E3=81=A6=E3=81=84=E3=81=9F=E3=81=A0=E3=81=8F=E5=BF=85=
+=E8=A6=81=E3=81=8C=E3=81=82=E3=82=8A=E3=81=BE=E3=81=99=E3=80=82</div>
+      <div style=3D"font-size: 16px; line-height: 1.5; text-align: left;">=
+=E3=83=BB=E8=AA=8D=E8=A8=BC=E3=82=B3=E3=83=BC=E3=83=89=E3=81=AE=E8=A9=B3=E7=
+=B4=B0=E3=81=AF=E3=80=81<a href=3D"https://ecw-relay-v2.chatwork.com/ls/cli=
+ck?upn=3Du001.DLgXZiZ-2Fo9s1RVgzQf60Y-2BGt62P-2B4WMeNYnGGey-2FB5csDgnProB6V=
+uMn00Kj67-2FzqU4YhRqPc9IAXnjf-2FrrnXg-3D-3DfQou_Za7T4v61EGHK-2BmWbBNOBf-2BA=
+Hpzs7ZJQxZPNga4TeD42nqINwXL4L07QFpb-2Fcna49HE-2FajrHNAgI1GiZ6VKOR06E2wzfOwT=
+BX5I4Js67SsS8H-2Fj82H1ucIW-2FveASnq2f3keVH6XTa48FpftZ57JzL5OSpq6a-2BbzvcZOj=
+9weUWIMktxlwEFaccQpYwu4AxeHAM0SD-2Bq7cfCfsqGAdT14pABQ-3D-3D" target=3D"_bla=
+nk" style=3D"color: #0ea5f3; text-decoration: none;">=E3=83=98=E3=83=AB=E3=
+=83=97=E3=83=9A=E3=83=BC=E3=82=B8</a>=E3=82=92=E3=81=94=E7=A2=BA=E8=AA=8D=
+=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82</div>
+      <div style=3D"font-size: 16px; line-height: 1.5; text-align: left;">=
+=E3=83=BB=E3=81=93=E3=81=AE=E8=AA=8D=E8=A8=BC=E3=82=B3=E3=83=BC=E3=83=89=E3=
+=81=AF=E7=AC=AC=E4=B8=89=E8=80=85=E3=81=AB=E6=95=99=E3=81=88=E3=81=AA=E3=81=
+=84=E3=81=A7=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82</div>
+    </div>
+  </div>
+</div>
+                        <div style=3D"width: 100%; background-color: #fffff=
+f;">
+  <img src=3D"https://mail-img.chatwork.com/html_mail/common/img_border_bot=
+tom.png?1759546233" alt=3D"" style=3D"width: auto; max-width: 100%; display=
+: block; border: none;">
+</div>
+
+                        <div style=3D"padding: 0 48px 40px; background-colo=
+r: #ffffff; text-align: left;">
+  <div style=3D"text-align: left;">
+    <p style=3D"margin-bottom: 16px; font-size: 16px; line-height: 1.5; mar=
+gin: 0; text-align: left;">
+      =E4=BD=95=E3=81=8B=E3=81=94=E4=B8=8D=E6=98=8E=E3=81=AA=E7=82=B9=E3=81=
+=8C=E3=81=82=E3=82=8A=E3=81=BE=E3=81=97=E3=81=9F=E3=82=89=E3=80=81=E4=B8=8B=
+=E8=A8=98=E3=81=AE=E3=80=8C=E3=82=88=E3=81=8F=E3=81=82=E3=82=8B=E8=B3=AA=E5=
+=95=8F=E3=80=8D=E3=82=92=E3=81=94=E8=A6=A7=E3=81=8F=E3=81=A0=E3=81=95=E3=81=
+=84=E3=80=82
+    </p>
+    <p style=3D"font-size: 16px; margin: 0; text-align: left;">
+      <a href=3D"https://ecw-relay-v2.chatwork.com/ls/click?upn=3Du001.DLgX=
+ZiZ-2Fo9s1RVgzQf60Y1CYVxCgPYGao0-2BBkcYcf-2F6g2pbwO4b0wUR9eHUlHGcNbJ7N_Za7T=
+4v61EGHK-2BmWbBNOBf-2BAHpzs7ZJQxZPNga4TeD42nqINwXL4L07QFpb-2Fcna49HE-2FajrH=
+NAgI1GiZ6VKOR00rGEI0dsPYQ3S-2FYs-2FXA6f3nTSGUmwbkQuBjLTxbgrO2hxmh0wT0EBTOY6=
+LAQqJR9Tz38j6Hw2IaCOlyry7G5icbO-2BU2ecu2j7uqLiFatUpaFnae7zYtNANv3CDlOYRutg-=
+3D-3D" target=3D"_blank" style=3D"color: #0ea5f3; font-size: 16px; text-dec=
+oration: none;">
+        =E6=A0=AA=E5=BC=8F=E4=BC=9A=E7=A4=BEkubell - =E3=82=88=E3=81=8F=E3=
+=81=82=E3=82=8B=E8=B3=AA=E5=95=8F
+      </a>
+    </p>
+  </div>
+</div>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div style=3D"width: 100%; padding: 0 0 40px; text-align: l=
+eft;">
+                  <p style=3D"margin-bottom: 8px; padding-top: 16px; font-s=
+ize: 11px; line-height: 1.4; color: #666; margin: 0; text-align: left;">
+                    =E2=80=BB=E6=9C=AC=E3=83=A1=E3=83=BC=E3=83=AB=E3=81=AB=
+=E3=81=8A=E5=BF=83=E3=81=82=E3=81=9F=E3=82=8A=E3=81=8C=E3=81=AA=E3=81=84=E5=
+=A0=B4=E5=90=88=E3=81=AF=E3=80=81<a href=3D"https://ecw-relay-v2.chatwork.c=
+om/ls/click?upn=3Du001.DLgXZiZ-2Fo9s1RVgzQf60Y-2BGt62P-2B4WMeNYnGGey-2FB5du=
+zbx5NZT35CVFAI2LlwfMC3kcz1SJPZ5Z7ivK25IDLw-3D-3DSeOS_Za7T4v61EGHK-2BmWbBNOB=
+f-2BAHpzs7ZJQxZPNga4TeD42nqINwXL4L07QFpb-2Fcna49HE-2FajrHNAgI1GiZ6VKOR01R7k=
+8jGD59CEwSRQjcugIPKqgpXOtvisb53eMRDA5u3AtdHPIP2hTcMjntWq4IOb6Vl7zKqUV9-2Bda=
+uNeqNWMm2hXklerv8ul1eL-2BFgGJ5yW-2FL8OvJeyZm7tj86qOk-2F7NA-3D-3D" target=3D=
+"_blank" style=3D"color: #0ea5f3; text-decoration: none;">=E3=83=98=E3=83=
+=AB=E3=83=97=E3=83=9A=E3=83=BC=E3=82=B8</a>=E3=82=92=E3=81=94=E7=A2=BA=E8=
+=AA=8D=E3=81=8F=E3=81=A0=E3=81=95=E3=81=84=E3=80=82
+                  </p>
+                  <p style=3D"margin-bottom: 8px; padding-top: 8px; font-si=
+ze: 11px; line-height: 1.4; color: #666; margin: 0; text-align: left;">
+                    =E2=80=BB=E3=81=93=E3=81=AE=E3=83=A1=E3=83=BC=E3=83=AB=
+=E3=82=A2=E3=83=89=E3=83=AC=E3=82=B9=E3=81=AF=E9=80=81=E4=BF=A1=E5=B0=82=E7=
+=94=A8=E3=81=A7=E3=81=99=E3=80=82=E8=BF=94=E4=BF=A1=E3=81=AF=E3=81=8A=E3=81=
+=93=E3=81=AA=E3=81=A3=E3=81=A6=E3=81=8A=E3=82=8A=E3=81=BE=E3=81=9B=E3=82=93=
+=E3=80=82
+                  </p>
+                </div>
+                <div style=3D"background: #34362f; display: block; text-ali=
+gn: center; padding: 16px 0;">
+  <a href=3D"https://ecw-relay-v2.chatwork.com/ls/click?upn=3Du001.DLgXZiZ-=
+2Fo9s1RVgzQf60Y8Cru36KGAfZ0HhXKAcix-2Fo-3DXnJb_Za7T4v61EGHK-2BmWbBNOBf-2BAH=
+pzs7ZJQxZPNga4TeD42nqINwXL4L07QFpb-2Fcna49HE-2FajrHNAgI1GiZ6VKOR06BuwZro-2B=
+GpjrVrtuydxGsyj6qEUbV7RflI109XQC5RCgnj3rCbg1LVZJrbyik9MMd30-2BI5OuADPtdwO3F=
+CbUGKjppumvTiMP-2FcLOtOv5GRBnZez1Ww4YZPQO3fYzmQy0A-3D-3D" style=3D"font-siz=
+e: 13px; color: #afada0; text-decoration: underline;">=E6=A0=AA=E5=BC=8F=E4=
+=BC=9A=E7=A4=BEkubell</a>
+</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+<img src=3D"https://ecw-relay-v2.chatwork.com/wf/open?upn=3Du001.RxBrF4B-2B=
+PD0sz5ME-2BhHbDh7jeJvS-2F5mWeE0-2BS-2FydxWQ8RHWQx3Ua8fflhUwQHFn0us61Fieq4iP=
+TY4hHORiGkU9FQqZ1w2Z6uPjlUOjArlrt5E-2BLR6FOAKUaGhMZW49-2F6lXp1l2wj5NSyqPzbz=
+M2aF-2B0ViFqh0jF6MaOthrgpgB07TTDd2ehtt7ai9oScsSKfiTSoAYv9L-2BSk1I-2FrDiHiDL=
+u2Yl39AZoBpvJsyr4mQs-3D" alt=3D"" width=3D"1" height=3D"1" border=3D"0" sty=
+le=3D"height:1px !important;width:1px !important;border-width:0 !important;=
+margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !importan=
+t;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !impor=
+tant;padding-right:0 !important;padding-left:0 !important;"/></body>
+
+</html>
+----_NmP-67cac0f2349f4b4f-Part_1--

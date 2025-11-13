@@ -1,0 +1,77 @@
+Return-Path: <s-akimoto@chikaramochi.com>
+Delivered-To: s-akimoto@robin-hood.jp
+X-Virus-Status: scanned (With Secure/Atlant/virusgw16021.xserver.jp/)
+Received: from mwb-ckd-mts-011c38.ocn.ad.jp (mwb-ckd-mts-011c38.ocn.ad.jp [210.227.230.39])
+	by sv16419.xserver.jp (Postfix) with ESMTPS id 0FFA13FBEACD4
+	for <s-akimoto@robin-hood.jp>; Fri,  3 Oct 2025 15:17:14 +0900 (JST)
+Authentication-Results: sv16419.xserver.jp;
+	dkim=pass header.d=chikaramochi.com header.s=bizmw header.b=bN02my0b;
+	dmarc=pass (policy=none) header.from=chikaramochi.com;
+	spf=pass (sv16419.xserver.jp: domain of s-akimoto@chikaramochi.com designates 210.227.230.39 as permitted sender) smtp.mailfrom=s-akimoto@chikaramochi.com;
+	arc=pass ("bizmw.com:s=default:i=1")
+ARC-Seal: i=2; s=default; d=robin-hood.jp; t=1759472234; a=rsa-sha256;
+	cv=pass;
+	b=gsoZkSYwYEaYuQJPbzq0nk6Hth1J15Mb3ntYSPplm1X4ixtPqPKt4s6ZAtZOcRVI4spcfu
+	R0zQZlwi4zW1zDMLNK1eQuye8i7S5eIgFIT5udDijrTRu8T+CO0SH17mrxCYI8fbjmy+HG
+	mj+yS+tV+A0mdzb4qUA//1ju5ZJtF65tuo0myKeWfkn4EDIly82P1mAEhtLkirEqFNXv5B
+	feBjF3pNuFoBNw3lGXyF/Z8NKiSs5PYY+l2Rojax2k8/cG/id2vEcYvAgJ05B6y6g5FlHZ
+	4QgMk8QYU+UO5RQD3EYk2e1hwF2jEdnIIM+gxESxg5C6AzalejXuvHmVft3jJw==
+ARC-Authentication-Results: i=2;
+	sv16419.xserver.jp;
+	dkim=pass header.d=chikaramochi.com header.s=bizmw header.b=bN02my0b;
+	dmarc=pass (policy=none) header.from=chikaramochi.com;
+	spf=pass (sv16419.xserver.jp: domain of s-akimoto@chikaramochi.com designates 210.227.230.39 as permitted sender) smtp.mailfrom=s-akimoto@chikaramochi.com;
+	arc=pass ("bizmw.com:s=default:i=1")
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=robin-hood.jp;
+	s=default; t=1759472234;
+	h=from:from:sender:reply-to:subject:date:date:message-id:message-id:
+	 to:to:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:in-reply-to:
+	 references:dkim-signature; bh=0evsWRXfJLjeSS+LIizOMhpoR9GzACSlHSD3iAYac9o=;
+	b=nc+1cxY8q30TkM0kbous0jWWssZJwEcRmr12ImSKGQoIkvJMu8AnguvT6ck8KsA9PX0ban
+	yDyPb1Jw2N0dX4Jd3/mOXImje8Y8Yyltx6XspAXac9CKaYnsAFPLy+wHENtOOqpI4IM4aa
+	vjabPxhq/AV0BEHiBsUmyw/WNeobnfNhK+wxx+JB5FJxLTlg+fLZfqW5R0lRtqiw1RI9RX
+	mQHpXFMo6wA2OkOuXvRkG8GDu9381bOSU32HHEX+3p22IaNr09iUoTnAeoL8NQGW9PROKU
+	TTF1innyV9PElikebdExfmBmG/g5L7ETAShJ9gjtongACLLnlBpZ7DvyjKhhhw==
+Received: from cmn-spm-mts-005c1.ocn.ad.jp (cmn-spm-mts-005c1.ocn.ad.jp [153.153.67.157])
+	by mwb-ckd-mts-011c38.ocn.ad.jp (Postfix) with ESMTP id DC5DE20002B4A
+	for <s-akimoto@robin-hood.jp>; Fri,  3 Oct 2025 15:17:13 +0900 (JST)
+Received: from mwb-vc-mts-002c1.ocn.ad.jp ([153.138.237.206])
+	by cmn-spm-mts-005c1.ocn.ad.jp with ESMTP
+	id 4Z6PvcTUMxGKG4Z6PvYYKX; Fri, 03 Oct 2025 15:17:13 +0900
+X-BIZ-RELAY: yes
+Received: from mwb-sdgw-mts-005c1.ocn.ad.jp ([210.145.253.205])
+	by mwb-vc-mts-002c1.ocn.ad.jp with ESMTP
+	id 4Z6PvKxzhQNG14Z6PvnNmk; Fri, 03 Oct 2025 15:17:13 +0900
+Received: from chikaramochi.com (chikaramochi.com [60.43.220.58])
+	by mwb-sdgw-mts-005c1.ocn.ad.jp (Postfix) with ESMTP id A24A61400008F
+	for <s-akimoto@robin-hood.jp>; Fri,  3 Oct 2025 15:17:13 +0900 (JST)
+Received: from smtpclient.apple (p3212151-ipoe.ipoe.ocn.ne.jp [122.16.9.150])
+	by chikaramochi.com (Postfix) with ESMTPA id 6A3C113976E7
+	for <s-akimoto@robin-hood.jp>; Fri,  3 Oct 2025 15:17:13 +0900 (JST)
+ARC-Seal: i=1; a=rsa-sha256; d=bizmw.com; s=default; t=1759472233; cv=none;
+	b=V83DxbIYHSepJT/Snr1/imeo5SDVRCLbguPR0P+TuJUuXGWvnlG6fxjXWunGkyOyiOh/vImrVnMoXv4ubns8q2/hj1C0oqeSw4PhbgY/bC9eBvMsO0DyOpf3AlS8NMnTac2sCtQxPprUfSGzkshfO4Hc0TWu8CKFewh4UM7IKPY=
+ARC-Message-Signature: i=1; a=rsa-sha256; d=bizmw.com; s=default;
+	t=1759472233; c=relaxed/relaxed;
+	bh=0evsWRXfJLjeSS+LIizOMhpoR9GzACSlHSD3iAYac9o=;
+	h=DKIM-Signature:From:Mime-Version:Date:Message-Id:To; b=4Sl5jEUM57qxbcxXZqN38dPuauOX9IQwmMKyOOzbXj5/NlhQzqnwBcS2phS2uLyYtTHeSZEGFxhbaKgtw4wTpqdbE4vxha7nrnwv7qzXToU1mqCPcb+B9rnc/21OCHeygFePEmxzlOB7UC0UtCPjn/cZ+5AgZwQNR6CWMYc7hmQ=
+ARC-Authentication-Results: i=1; chikaramochi.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chikaramochi.com;
+	s=bizmw; t=1759472233;
+	bh=0evsWRXfJLjeSS+LIizOMhpoR9GzACSlHSD3iAYac9o=;
+	h=From:Date:To:From;
+	b=bN02my0bWB5rq4nUl/YRrgEe7qZpr6+XATmPA8OcGwywOFiEgG84+X8rwcHds2YRl
+	 rIc22d/mnshNX3q//j8pC8ek3zXWwvkEPmdBokOEsrzl+yBGJVoS+lFx9CAyOzv5Ey
+	 ncsHwu1Y1ofwTEH+0C+lS7De3wXlK8qesmB9rSe0=
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+From: SHUTARO AKIMOTO <s-akimoto@chikaramochi.com>
+Mime-Version: 1.0 (1.0)
+Date: Fri, 3 Oct 2025 15:17:02 +0900
+Message-Id: <93BFE872-E83C-4CB5-A8BF-17C386E8B0B3@chikaramochi.com>
+To: s-akimoto@robin-hood.jp
+X-Mailer: iPhone Mail (22G100)
+XSRV-Filter: s-akimoto@robin-hood.jp
+
+44OG44K544OIDQroj7Hnp4vmnKjmnZDmoKrlvI/kvJrnpL4NCkhpc2hpYWtpIE1va3V6YWkgQ28u
+LEx0ZA0K56eL5YWD44CA56eA5aSq6YOODQpTaHV0YXJvIEFraW1vdG8NCg0KDQo=

@@ -1,0 +1,1180 @@
+Return-Path: <bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com>
+Delivered-To: s-akimoto@robin-hood.jp
+X-Virus-Status: scanned (With Secure/Atlant/virusgw16021.xserver.jp/)
+Received: from o16789107x114.outbound-mail.sendgrid.net (o16789107x114.outbound-mail.sendgrid.net [167.89.107.114])
+	by sv16419.xserver.jp (Postfix) with ESMTPS id B52AF45C6D3D6
+	for <s-akimoto@robin-hood.jp>; Fri,  3 Oct 2025 17:00:52 +0900 (JST)
+Authentication-Results: sv16419.xserver.jp;
+	dkim=pass header.d=support.chatwork.com header.s=cw header.b=DI3GCpbM;
+	dmarc=pass (policy=none) header.from=chatwork.com;
+	spf=pass (sv16419.xserver.jp: domain of "bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com" designates 167.89.107.114 as permitted sender) smtp.mailfrom="bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com"
+ARC-Seal: i=1; s=default; d=robin-hood.jp; t=1759478453; a=rsa-sha256;
+	cv=none;
+	b=gF3d2LJjaM143lEfl3+7rv39ff34HxbXRJCyvLukmA7z4UOT1gWi+nNUdGQDXKjJtCUyJU
+	wd9doDyq44MBYp9rVuftNv6AnIc8q74AOIcf3M+ObpISpQy5Ze14KCT9evbBUo6YBpL7Xh
+	eRJpAPY4YbiWBYH3tDIPPb+iaR/OLpe46XOBFU+67WjFH2uNg4BxVakXY4a7kfWwuEtt6J
+	tzdsseKbPE2vu6sTJV8NbSKJCE4aiZCBHrps970pFSkd4MsxO/niDjjhT29BD74xEU86LS
+	t3kEC0kSXdG3++ON2CSei5gGMRowqtfrsTzcj0MpFUpmcJzUsRRuNWgUyvCVYg==
+ARC-Authentication-Results: i=1;
+	sv16419.xserver.jp;
+	dkim=pass header.d=support.chatwork.com header.s=cw header.b=DI3GCpbM;
+	dmarc=pass (policy=none) header.from=chatwork.com;
+	spf=pass (sv16419.xserver.jp: domain of "bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com" designates 167.89.107.114 as permitted sender) smtp.mailfrom="bounces+3805754-12ab-s-akimoto=robin-hood.jp@ecwrelayv2.support.chatwork.com"
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=robin-hood.jp;
+	s=default; t=1759478453;
+	h=from:from:sender:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:mime-version:mime-version:
+	 content-type:content-type:content-transfer-encoding:in-reply-to:
+	 references:dkim-signature; bh=s47FLBVLJGRYzNu9Ri6mjhMAiX5c+4bIfawOaxfoQnY=;
+	b=sOnjpern60CPzFmIEuMLWsl0deXKxFXm8vxIKrVTKG33e4EOIp4gBhDAX0ajf5gYQT0clU
+	AZGO2wYbGbvE1EiHF1Ycs7ZWbAxhtpTaC8DZtf/1YrL3jSWCglFP/LCwBvIsFdTgC9wzvb
+	aENbDzkIbxyEWMM0eVlsxpWpyoHsNO0XJC1K7qYVUoBxH64ZNb5/88t64zhRxfRIQjzPc+
+	hAoUBHTlwTlESVJ1oTtgeJqme/nGR+aaGJUaXtEjMgBwiddj22NyG8yVpoZbQZG0rvn/SM
+	o2dNNK9u2kkph6RH478KimuHYQerFGsVCFFcx3/c0tdJ9O0D80X+cWohYxOgYA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=support.chatwork.com;
+	h=subject:date:from:mime-version:to:content-type:cc:content-type:date:
+	from:subject:to;
+	s=cw; bh=s47FLBVLJGRYzNu9Ri6mjhMAiX5c+4bIfawOaxfoQnY=;
+	b=DI3GCpbMasOfh//Bz7357hbcazM8B7w1P0SSg8yns7EJAksyVaiypVRqgpC/BS6vGoN0
+	n/c6aAggEUHPd4yU0x4AUi1sDvAYjKTdrL6g6CO9nwRT7ZG8BmI+esC+Ys2ciU5OeGk4j/
+	ebQLHuXcXkjNOdYQytUPIp7XDY3nZtORQMVxDEdGxbQZO7TzrqBTVknKMameuwCjLcVqBV
+	nH9Er7MxshpdlqDcnaiXRfG2Rgpwulz1FCGCVlNPZrTn/MozXYrixULQzfdieMkbJo73QI
+	kz80c+y1BApNPbPeZx2oArIswg78ZxEgFV4+rI6pXxd5u0X1dTDhvBRuvdOQAiqg==
+Received: by recvd-549df64948-hgz8l with SMTP id recvd-549df64948-hgz8l-1-68DF82B2-67
+	2025-10-03 08:00:50.376625724 +0000 UTC m=+10423662.692190035
+Received: from postfix-server-2.localdomain (unknown)
+	by geopod-ismtpd-13 (SG) with ESMTP id TAMXfUE0RUaC_2Jnmg6z4w
+	for <s-akimoto@robin-hood.jp>; Fri, 03 Oct 2025 08:00:50.129 +0000 (UTC)
+Received: from postfix-daemon-mlwrg.localdomain (10-2-116-23.postfix-daemon.postfix.svc.cluster.local [10.2.116.23])
+	by postfix-server-2.localdomain (Postfix) with ESMTP id 4BDFF5E0002
+	for <s-akimoto@robin-hood.jp>; Fri,  3 Oct 2025 08:00:49 +0000 (UTC)
+Received: from localhost (10-2-99-14.chatwork-web-php.chatwork-web.svc.cluster.local [10.2.99.14])
+	by postfix-daemon-mlwrg.localdomain (Postfix) with ESMTP id 3982E94085E6
+	for <s-akimoto@robin-hood.jp>; Fri,  3 Oct 2025 08:00:49 +0000 (UTC)
+Subject: 
+ =?UTF-8?B?44CQQ2hhdHdvcmvjgJHjgqLjgqvjgqbjg7Pjg4jnmbvpjLLlrozkuobjga7jgYrnn6XjgonjgZs=?=
+Date: Fri, 03 Oct 2025 08:00:50 +0000 (UTC)
+From: Chatwork <info@support.chatwork.com>
+Message-ID: <5618c420b5bd635b53ebf3b177547959@www.chatwork.com>
+X-Priority: 3
+X-Mailer: PHPMailer [version 1.73/EC Framework v0.90]
+X-CW-ERROR-BACKUP: 68df82b12f4e9
+MIME-Version: 1.0
+X-SG-EID: 
+ =?us-ascii?Q?u001=2E1vKvuwPlZ2S=2FMvsrUSquHoHtL4EQjwsG54gnuVvDkbr6bsUdIXM=2F=2FLMAp?=
+ =?us-ascii?Q?Pr+RDiCV7wpvYOLaohSfikcWv7rThnb=2Fz21qNf9?=
+ =?us-ascii?Q?TTTo=2Fts+x+19mKy37EfsuBamumMWAl7UTtyA3Ti?=
+ =?us-ascii?Q?ZPKi823bEK7j6DgnH=2FNl1kqwuICkdWWZ30oUVyE?=
+ =?us-ascii?Q?GUhrVlyUqTqRaRnWWeKSQfSj10FooAb0od29nWn?=
+ =?us-ascii?Q?LO1itN5HA=2F8hEEN8J3Ik3zFUJsvE0ykd1rqKw6E?= =?us-ascii?Q?sEob?=
+X-SG-ID: 
+ =?us-ascii?Q?u001=2ESdBcvi+Evd=2FbQef8eZF3Bv3Vb6yXUV9djQNC=2Fz6MtcebAW2lFKT=2FpFmOT?=
+ =?us-ascii?Q?cKg5r82SrWm=2FIC3xxHP55ZgefFifA=3D=3D?=
+To: s-akimoto@robin-hood.jp
+X-Entity-ID: u001.jXG1I5kc1O9grnCcw12EIA==
+Content-Type: multipart/alternative;
+	boundary="b1_5618c420b5bd635b53ebf3b177547959"
+XSRV-Filter: s-akimoto@robin-hood.jp
+
+--b1_5618c420b5bd635b53ebf3b177547959
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+秋元秀太郎
+秋元秀太郎 様
+ 
+いつもお世話になっております。
+Chatwork サポートデスクです。
+
+以下の内容でアカウント登録が完了しました。
+
+【ユーザー情報】
+-------------------------------------------------
+　◇ 会社名 : 秋元秀太郎
+　◇ 名前 : 秋元秀太郎
+　◇ メールアドレス : s-akimoto@robin-hood.jp
+-------------------------------------------------
+
+・Chatworkを開く
+https://www.chatwork.com
+
+Chatworkはスマートフォンやタブレットにも対応し、移動中や外出先からでも快適にご利用いただけます。
+スマートフォンやタブレットでご利用の場合はアプリをダウンロードしてご利用ください。
+
+・iPhoneアプリ
+https://l.chatwork.com/cw_iphone_ja
+
+・Androidアプリ
+https://l.chatwork.com/cw_android_ja
+
+何かご不明な点がありましたら、下記の「よくある質問」をご覧ください。
+
+Chatwork - よくある質問
+https://help.chatwork.com/hc/ja/
+
+Chatwork - ご利用ガイド（PDF）をダウンロードする
+https://l.chatwork.com/h_guide_ja
+
+今後ともChatworkをどうぞよろしくお願いいたします。
+
+※このメールアドレスは送信専用です。返信はおこなっておりません。
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+┃株式会社kubell
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ URL：https://go.chatwork.com/ja/
+ お問い合わせ：https://help.chatwork.com/hc/ja
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+--b1_5618c420b5bd635b53ebf3b177547959
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>アカウント登録完了のお知らせ</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-2022-jp">
+  <meta name="robots" content="noindex, follow">
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css" media="screen"><!--
+/**********************************************
+* Ink v1.0.5 - Copyright 2013 ZURB Inc        *
+**********************************************/
+
+/* Client-specific Styles & Reset */
+
+#outlook a { 
+  padding:0; 
+} 
+
+body{ 
+  width:100% !important; 
+  min-width: 100%;
+  -webkit-text-size-adjust:100%; 
+  -ms-text-size-adjust:100%; 
+  margin:0; 
+  padding:0;
+  background-color: #f5f5f4;
+  font-size: 100%;
+}
+
+.ExternalClass { 
+  width:100%;
+} 
+
+.ExternalClass, 
+.ExternalClass p, 
+.ExternalClass span, 
+.ExternalClass font, 
+.ExternalClass td, 
+.ExternalClass div { 
+  line-height: 100%; 
+} 
+
+#backgroundTable { 
+  margin:0; 
+  padding:0; 
+  width:100% !important; 
+  line-height: 100% !important; 
+}
+
+img { 
+  outline:none; 
+  text-decoration:none; 
+  -ms-interpolation-mode: bicubic;
+  width: auto;
+  max-width: 100%; 
+  float: left; 
+  clear: both; 
+  display: block;
+}
+
+center {
+  width: 100%;
+  min-width: 580px;
+}
+
+a {
+  color: #19a4ef;
+}
+
+a img { 
+  border: none;
+}
+
+p {
+  margin: 0 0 0 10px;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td { 
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  border-collapse: collapse !important; 
+}
+
+table, tr, td {
+  padding: 0;
+  vertical-align: top;
+  text-align: left;
+}
+
+hr {
+  color: #d9d9d9; 
+  background-color: #d9d9d9; 
+  height: 1px; 
+  border: none;
+}
+
+/* Responsive Grid */
+
+table.body {
+  height: 100%;
+  width: 100%;
+}
+
+table.container {
+  width: 580px;
+  margin: 0 auto;
+  text-align: inherit;
+}
+
+table.row { 
+  padding: 0px; 
+  width: 100%;
+  position: relative;
+}
+
+table.container table.row {
+  display: block;
+}
+
+td.wrapper {
+  padding: 10px 20px 0px 0px;
+  position: relative;
+}
+
+table.columns,
+table.column {
+  margin: 0 auto;
+}
+
+table.columns td,
+table.column td {
+  padding: 0px 0px 10px; 
+}
+
+table.columns td.sub-columns,
+table.column td.sub-columns,
+table.columns td.sub-column,
+table.column td.sub-column {
+  padding-right: 10px;
+}
+
+td.sub-column, td.sub-columns {
+  min-width: 0px;
+}
+
+table.row td.last,
+table.container td.last {
+  padding-right: 0px;
+}
+
+table.one { width: 30px; }
+table.two { width: 80px; }
+table.three { width: 130px; }
+table.four { width: 180px; }
+table.five { width: 230px; }
+table.six { width: 280px; }
+table.seven { width: 330px; }
+table.eight { width: 380px; }
+table.nine { width: 430px; }
+table.ten { width: 480px; }
+table.eleven { width: 530px; }
+table.twelve { width: 580px; }
+
+table.one center { min-width: 30px; }
+table.two center { min-width: 80px; }
+table.three center { min-width: 130px; }
+table.four center { min-width: 180px; }
+table.five center { min-width: 230px; }
+table.six center { min-width: 280px; }
+table.seven center { min-width: 330px; }
+table.eight center { min-width: 380px; }
+table.nine center { min-width: 430px; }
+table.ten center { min-width: 480px; }
+table.eleven center { min-width: 530px; }
+table.twelve center { min-width: 580px; }
+
+table.one .panel center { min-width: 10px; }
+table.two .panel center { min-width: 60px; }
+table.three .panel center { min-width: 110px; }
+table.four .panel center { min-width: 160px; }
+table.five .panel center { min-width: 210px; }
+table.six .panel center { min-width: 260px; }
+table.seven .panel center { min-width: 310px; }
+table.eight .panel center { min-width: 360px; }
+table.nine .panel center { min-width: 410px; }
+table.ten .panel center { min-width: 460px; }
+table.eleven .panel center { min-width: 510px; }
+table.twelve .panel center { min-width: 560px; }
+
+.body .columns td.one,
+.body .column td.one { width: 8.333333%; }
+.body .columns td.two,
+.body .column td.two { width: 16.666666%; }
+.body .columns td.three,
+.body .column td.three { width: 25%; }
+.body .columns td.four,
+.body .column td.four { width: 33.333333%; }
+.body .columns td.five,
+.body .column td.five { width: 41.666666%; }
+.body .columns td.six,
+.body .column td.six { width: 50%; }
+.body .columns td.seven,
+.body .column td.seven { width: 58.333333%; }
+.body .columns td.eight,
+.body .column td.eight { width: 66.666666%; }
+.body .columns td.nine,
+.body .column td.nine { width: 75%; }
+.body .columns td.ten,
+.body .column td.ten { width: 83.333333%; }
+.body .columns td.eleven,
+.body .column td.eleven { width: 91.666666%; }
+.body .columns td.twelve,
+.body .column td.twelve { width: 100%; }
+
+td.offset-by-one { padding-left: 50px; }
+td.offset-by-two { padding-left: 100px; }
+td.offset-by-three { padding-left: 150px; }
+td.offset-by-four { padding-left: 200px; }
+td.offset-by-five { padding-left: 250px; }
+td.offset-by-six { padding-left: 300px; }
+td.offset-by-seven { padding-left: 350px; }
+td.offset-by-eight { padding-left: 400px; }
+td.offset-by-nine { padding-left: 450px; }
+td.offset-by-ten { padding-left: 500px; }
+td.offset-by-eleven { padding-left: 550px; }
+
+td.expander {
+  visibility: hidden;
+  width: 0px;
+  padding: 0 !important;
+}
+
+table.columns .text-pad,
+table.column .text-pad {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+table.columns .left-text-pad,
+table.columns .text-pad-left,
+table.column .left-text-pad,
+table.column .text-pad-left {
+  padding-left: 10px;
+}
+
+table.columns .right-text-pad,
+table.columns .text-pad-right,
+table.column .right-text-pad,
+table.column .text-pad-right {
+  padding-right: 10px;
+}
+
+/* Block Grid */
+
+.block-grid {
+  width: 100%;
+  max-width: 580px;
+}
+
+.block-grid td {
+  display: inline-block;
+  padding:10px;
+}
+
+.two-up td {
+  width:270px;
+}
+
+.three-up td {
+  width:173px;
+}
+
+.four-up td {
+  width:125px;
+}
+
+.five-up td {
+  width:96px;
+}
+
+.six-up td {
+  width:76px;
+}
+
+.seven-up td {
+  width:62px;
+}
+
+.eight-up td {
+  width:52px;
+}
+
+/* Alignment & Visibility Classes */
+
+table.center, td.center {
+  text-align: center;
+}
+
+h1.center,
+h2.center,
+h3.center,
+h4.center,
+h5.center,
+h6.center {
+  text-align: center;
+}
+
+span.center {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+img.center {
+  margin: 0 auto;
+  float: none;
+}
+
+.show-for-small,
+.hide-for-desktop {
+  display: none;
+}
+
+/* Typography */
+
+body, table.body, h1, h2, h3, h4, h5, h6, p, td { 
+  color: #000000;
+  font-family: "Helvetica Neue", Helvetica, Arial, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+  font-weight: normal; 
+  padding:0; 
+  margin: 0;
+  text-align: left; 
+  line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  word-break: normal;
+}
+
+h1 {font-size: 40px;}
+h2 {font-size: 36px;}
+h3 {font-size: 32px;}
+h4 {font-size: 28px;}
+h5 {font-size: 24px;}
+h6 {font-size: 20px;}
+body, table.body, p, td {font-size: 1em;line-height:19px;}
+
+p.lead, p.lede, p.leed {
+  font-size: 18px;
+  line-height:21px;
+}
+
+p { 
+  margin-bottom: 10px;
+}
+
+small {
+  font-size: 10px;
+}
+
+a {
+  color: #2ba6cb; 
+  text-decoration: none;
+}
+
+a:hover { 
+  color: #2795b6 !important;
+}
+
+a:active { 
+  color: #2795b6 !important;
+}
+
+a:visited { 
+  color: #2ba6cb !important;
+}
+
+.footer a { 
+  color: #afada0 !important;
+}
+
+.footer a:hover { 
+  color: #afada0 !important;
+}
+
+.footer a:active { 
+  color: #afada0 !important;
+}
+
+.footer a:visited { 
+  color: #afada0 !important;
+}
+
+h1 a, 
+h2 a, 
+h3 a, 
+h4 a, 
+h5 a, 
+h6 a {
+  color: #2ba6cb;
+}
+
+h1 a:active, 
+h2 a:active,  
+h3 a:active, 
+h4 a:active, 
+h5 a:active, 
+h6 a:active { 
+  color: #2ba6cb !important; 
+} 
+
+h1 a:visited, 
+h2 a:visited,  
+h3 a:visited, 
+h4 a:visited, 
+h5 a:visited, 
+h6 a:visited { 
+  color: #2ba6cb !important; 
+} 
+
+/* Panels */
+
+.panel {
+  background: #f2f2f2;
+  border: 1px solid #d9d9d9;
+  padding: 10px !important;
+}
+
+.sub-grid table {
+  width: 100%;
+}
+
+.sub-grid td.sub-columns {
+  padding-bottom: 0;
+}
+
+/* Buttons */
+
+table.button,
+table.tiny-button,
+table.small-button,
+table.medium-button,
+table.large-button {
+  width: 100%;
+  overflow: hidden;
+}
+
+table.button td,
+table.tiny-button td,
+table.small-button td,
+table.medium-button td,
+table.large-button td {
+  display: block;
+  width: auto !important;
+  text-align: center;
+  background: #2ba6cb;
+  border: 1px solid #2284a1;
+  color: #ffffff;
+  padding: 8px 0;
+}
+
+table.tiny-button td {
+  padding: 5px 0 4px;
+}
+
+table.small-button td {
+  padding: 8px 0 7px;
+}
+
+table.medium-button td {
+  padding: 12px 0 10px;
+}
+
+table.large-button td {
+  padding: 21px 0 18px;
+}
+
+table.button td a,
+table.tiny-button td a,
+table.small-button td a,
+table.medium-button td a,
+table.large-button td a {
+  font-weight: bold;
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+table.tiny-button td a {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+table.small-button td a {
+  font-size: 16px;
+}
+
+table.medium-button td a {
+  font-size: 20px;
+}
+
+table.large-button td a {
+  font-size: 24px;
+}
+
+table.button:hover td,
+table.button:visited td,
+table.button:active td {
+  background: #2795b6 !important;
+}
+
+table.button:hover td a,
+table.button:visited td a,
+table.button:active td a {
+  color: #fff !important;
+}
+
+table.button:hover td,
+table.tiny-button:hover td,
+table.small-button:hover td,
+table.medium-button:hover td,
+table.large-button:hover td {
+  background: #2795b6 !important;
+}
+
+table.button:hover td a,
+table.button:active td a,
+table.button td a:visited,
+table.tiny-button:hover td a,
+table.tiny-button:active td a,
+table.tiny-button td a:visited,
+table.small-button:hover td a,
+table.small-button:active td a,
+table.small-button td a:visited,
+table.medium-button:hover td a,
+table.medium-button:active td a,
+table.medium-button td a:visited,
+table.large-button:hover td a,
+table.large-button:active td a,
+table.large-button td a:visited {
+  color: #ffffff !important; 
+}
+
+table.secondary td {
+  background: #e9e9e9;
+  border-color: #d0d0d0;
+  color: #555;
+}
+
+table.secondary td a {
+  color: #555;
+}
+
+table.secondary:hover td {
+  background: #d0d0d0 !important;
+  color: #555;
+}
+
+table.secondary:hover td a,
+table.secondary td a:visited,
+table.secondary:active td a {
+  color: #555 !important;
+}
+
+table.success td {
+  background: #5da423;
+  border-color: #457a1a;
+}
+
+table.success:hover td {
+  background: #457a1a !important;
+}
+
+table.alert td {
+  background: #c60f13;
+  border-color: #970b0e;
+}
+
+table.alert:hover td {
+  background: #970b0e !important;
+}
+
+table.radius td {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+table.round td {
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  border-radius: 500px;
+}
+
+/* Outlook First */
+
+body.outlook p {
+  display: inline !important;
+}
+
+/*  Media Queries */
+
+@media only screen and (max-width: 600px) {
+
+  table[class="body"] img {
+    width: auto !important;
+    height: auto !important;
+  }
+
+  table[class="body"] center {
+    min-width: 0 !important;
+  }
+
+  table[class="body"] .container {
+    width: 95% !important;
+  }
+
+  table[class="body"] .row {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  table[class="body"] .wrapper {
+    display: block !important;
+    padding-right: 0 !important;
+  }
+
+  table[class="body"] .columns,
+  table[class="body"] .column {
+    table-layout: fixed !important;
+    float: none !important;
+    width: 100% !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    display: block !important;
+  }
+
+  table[class="body"] .wrapper.first .columns,
+  table[class="body"] .wrapper.first .column {
+    display: table !important;
+  }
+
+  table[class="body"] table.columns td,
+  table[class="body"] table.column td {
+    width: 100% !important;
+  }
+
+  table[class="body"] .columns td.one,
+  table[class="body"] .column td.one { width: 8.333333% !important; }
+  table[class="body"] .columns td.two,
+  table[class="body"] .column td.two { width: 16.666666% !important; }
+  table[class="body"] .columns td.three,
+  table[class="body"] .column td.three { width: 25% !important; }
+  table[class="body"] .columns td.four,
+  table[class="body"] .column td.four { width: 33.333333% !important; }
+  table[class="body"] .columns td.five,
+  table[class="body"] .column td.five { width: 41.666666% !important; }
+  table[class="body"] .columns td.six,
+  table[class="body"] .column td.six { width: 50% !important; }
+  table[class="body"] .columns td.seven,
+  table[class="body"] .column td.seven { width: 58.333333% !important; }
+  table[class="body"] .columns td.eight,
+  table[class="body"] .column td.eight { width: 66.666666% !important; }
+  table[class="body"] .columns td.nine,
+  table[class="body"] .column td.nine { width: 75% !important; }
+  table[class="body"] .columns td.ten,
+  table[class="body"] .column td.ten { width: 83.333333% !important; }
+  table[class="body"] .columns td.eleven,
+  table[class="body"] .column td.eleven { width: 91.666666% !important; }
+  table[class="body"] .columns td.twelve,
+  table[class="body"] .column td.twelve { width: 100% !important; }
+
+  table[class="body"] td.offset-by-one,
+  table[class="body"] td.offset-by-two,
+  table[class="body"] td.offset-by-three,
+  table[class="body"] td.offset-by-four,
+  table[class="body"] td.offset-by-five,
+  table[class="body"] td.offset-by-six,
+  table[class="body"] td.offset-by-seven,
+  table[class="body"] td.offset-by-eight,
+  table[class="body"] td.offset-by-nine,
+  table[class="body"] td.offset-by-ten,
+  table[class="body"] td.offset-by-eleven {
+    padding-left: 0 !important;
+  }
+
+  table[class="body"] table.columns td.expander {
+    width: 1px !important;
+  }
+
+  table[class="body"] .right-text-pad,
+  table[class="body"] .text-pad-right {
+    padding-left: 10px !important;
+  }
+
+  table[class="body"] .left-text-pad,
+  table[class="body"] .text-pad-left {
+    padding-right: 10px !important;
+  }
+
+  table[class="body"] .hide-for-small,
+  table[class="body"] .show-for-desktop {
+    display: none !important;
+  }
+
+  table[class="body"] .show-for-small,
+  table[class="body"] .hide-for-desktop {
+    display: inherit !important;
+  }
+}
+
+  --></style>
+  <style type="text/css" media="screen"><!--
+
+    table.facebook td {
+      background: #3b5998;
+      border-color: #2d4473;
+    }
+
+    table.facebook:hover td {
+      background: #2d4473 !important;
+    }
+
+    table.twitter td {
+      background: #00acee;
+      border-color: #0087bb;
+    }
+
+    table.twitter:hover td {
+      background: #0087bb !important;
+    }
+
+    table.google-plus td {
+      background-color: #DB4A39;
+      border-color: #CC0000;
+    }
+
+    table.google-plus:hover td {
+      background: #CC0000 !important;
+    }
+
+    .template-label {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 11px;
+    }
+
+    .callout .wrapper {
+      padding-bottom: 20px;
+    }
+
+    .callout .panel {
+      background: #ECF8FF;
+      border-color: #b9e5ff;
+    }
+
+    .header {
+      background: #999999;
+    }
+
+    .footer .wrapper {
+      background: #ebebeb;
+    }
+
+    .footer h5 {
+      padding-bottom: 10px;
+    }
+
+    table.columns .text-pad {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    table.columns .left-text-pad {
+      padding-left: 10px;
+    }
+
+    table.columns .right-text-pad {
+      padding-right: 10px;
+    }
+
+    @media only screen and (max-width: 600px) {
+
+      table[class="body"] .right-text-pad {
+        padding-left: 10px !important;
+      }
+
+      table[class="body"] .left-text-pad {
+        padding-right: 10px !important;
+      }
+    }
+  --></style>
+</head>
+<body>
+  <table class="body" style="width:100%;">
+    <tr>
+      <td class="center" align="center" valign="top" style="width:100%;">
+        <center>
+          <table class="container">
+            <tbody>
+              <tr>
+                <td style="width:580px; padding:3%; background-color:#f5f5f4;">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td style="width:100%; background-color:#ffffff;">
+                          <!-- HEADER -->
+                          <table class="row">
+                            <tr>
+                              <td style="width:100%; padding:0;">
+                                                                <img src="https://mail-img.chatwork.com/html_mail/img_chatwork_header.png?1759456030" alt="ChatWork" style="width:auto; max-width:100%;">
+                              </td>
+                            </tr>
+                          </table><!-- /HEADER -->
+                          <!-- CONTENT BODY -->
+<table style="width:100%;">
+  <tr>
+    <td>
+      <!-- SUMMARY -->
+      <table width="100%" style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="width:100%; vertical-align:top; padding:3.125em 8% 0; background-color:#ffffff;">
+              <table width="100%" style="width:100%;">
+                <tbody>
+                  <tr>
+                    <td style="padding-bottom:40px;">
+                      <h2 style="font-size:22px; line-height:1.5; font-weight:bold; margin: 0; text-align:center;">ご登録ありがとうございます</h2>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width:100%;">
+                      <p style="margin-bottom:.625em; font-size:16px; line-height:1.5; text-align:center;">以下の内容でアカウント登録が完了しました。</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table><!-- /SUMMARY -->
+      <!-- CONTENT -->
+      <!-- お申込内容 -->
+      <table style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="width:100%; padding:1.875em 8% 0; vertical-align:top; background-color:#ffffff;">
+              <h3 style="margin-bottom:.555555556em; font-size:18px; font-weight:700;">ユーザー情報</h3>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="width:100%; margin-bottom:1.25em; padding:0 3% 0; background-color:#ffffff;">
+              <div style="margin-bottom:20px; padding:5%; background-color:#f9f8f6;">
+                <table style="width:100%;">
+                  <tbody>
+                                                            <tr>
+                      <td style="width:30%; padding:0 1em 1em 0; font-weight:700; text-align:right; line-height:1; vertical-align:baseline;">会社名</td>
+                      <td style="line-height:1; vertical-align:baseline;">秋元秀太郎</td>
+                    </tr>
+                    <tr>
+                      <td style="width:30%; padding:0 1em 0 0; font-weight:700; text-align:right; line-height:1; vertical-align:baseline;">名前</td>
+                      <td style="line-height:1; vertical-align:baseline;">秋元秀太郎</td>
+                    </tr>
+                    <tr>
+                      <td style="width:30%; padding:1em 1em 0 0; font-weight:700; text-align:right; line-height:1; vertical-align:baseline;">メールアドレス</td>
+                      <td style="padding:0; line-height:1; vertical-align:baseline;">s-akimoto@robin-hood.jp</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table><!-- /お申込内容 -->
+
+            <table style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="width:100%; padding:2.5em 8% 2.5em; vertical-align:top; background-color:#ffffff; text-align:center;">
+              <a href="https://ecw-relay-v2.chatwork.com/ls/click?upn=u001.DLgXZiZ-2Fo9s1RVgzQf60Y4-2FGjMLxYw9MlSIMxPOlS3dhCxXzFM-2FYBlT7AErlDJBSHLUq_Za7T4v61EGHK-2BmWbBNOBf-2BAHpzs7ZJQxZPNga4TeD42BUZy-2Bqa2lINXIvqs4bUWWUdi-2F-2F957qlilfYRGHmxORQIizJJqgwkLWhzhwypk2FmrdjTe8MGgkRz1YHpvRXyIaLukhk-2FcIw0hPQFFweX1sszmHC7Mcxbxd-2F0UoB7mYCGnX-2FltB9apXhwjtry9gP21Qra8zlAjcrbTFjaItdnTymXgjvS8JBsQrdk5-2BvERBDFm4wNmLEPkmPgHy9BDuniF" style="text-decoration:none; display:inline-block; padding:.9375em 3em; border-radius:3px; color:#ffffff!important; background-color:#00a3ba; text-align:center;" role="button" aria-label="Chatworkを開く">Chatworkを開く</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+                  
+      <!-- Open The ChatWork! -->
+      <table style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="width:100%; padding:0 8% 0; vertical-align:top; background-color:#ffffff;">
+                              <!-- SmartPhoneSupport start -->
+              <table>
+                <tbody>
+                  <tr style="width:100%; margin-bottom:0;">
+                    <td>
+                      <h3 style="margin-bottom:.555555556em; font-size:18px; font-weight:700;">スマートフォンアプリからもご利用いただけます</h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width:100%; padding-bottom:1em;">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td style="padding-right:.5em;">
+                              <a href="https://ecw-relay-v2.chatwork.com/ls/click?upn=u001.DLgXZiZ-2Fo9s1RVgzQf60Y1EhZpVSJ0-2BRxXdf7TQRHOJkhUPqFQybzdDyJGX-2BHSm6wDyH_Za7T4v61EGHK-2BmWbBNOBf-2BAHpzs7ZJQxZPNga4TeD42BUZy-2Bqa2lINXIvqs4bUWWUdi-2F-2F957qlilfYRGHmxORXbbMJQt-2Bjotk7AbRnEW6SEmMWDmC4xmOapaLQO-2FLFbZtkkT95XLhW9PLa8LNgUAQEkkFC0ETr4EgpmJQMnTIT7y6pizbVbkNibCrxPQpDRgZKBUdNNbX61-2FrB2IZZcqPGkPMiZrJcUMhkESMZC1n-2Fr14yQmAl-2Fady3z-2FYII2Neh"><img src="https://mail-img.chatwork.com/html_mail/common/badge_app_store.png?1759456030" alt="Download on the App Store"></a>
+                            </td>
+                            <td style="padding:0;">
+                              <a href="https://ecw-relay-v2.chatwork.com/ls/click?upn=u001.DLgXZiZ-2Fo9s1RVgzQf60Y1EhZpVSJ0-2BRxXdf7TQRHOJzS-2FBbMBhMLVxJX0HM8wx-2FiI_2_Za7T4v61EGHK-2BmWbBNOBf-2BAHpzs7ZJQxZPNga4TeD42BUZy-2Bqa2lINXIvqs4bUWWUdi-2F-2F957qlilfYRGHmxORZtlIGZy7swTIfXEZpKWmCzEpUSafxMcJ-2FqXpy49DR88FlK7DYuR2EY51hRDDlUk2ryWGCuUEJ9IzlLvuL3O4r-2B6mhXb0aI9t-2F1XWNXMGEBAKdRkEkplOFaYnyEziI5ifaABq4eWKAwJFgPT9g29lV04axb54cvx59HjvFBezAJk"><img src="https://mail-img.chatwork.com/html_mail/common/google-play-badge_ja.png?1759456030" alt="Google Play および Google Play ロゴは、Google Inc. の商標です。"></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr style="width:100%; margin-bottom:0;">
+                    <td style="padding-bottom:1.5em;" >
+                      <p style="line-height:1.5;">Chatworkはスマートフォンやタブレットにも対応し、移動中や外出先からでも快適にご利用いただけます。<br />
+スマートフォンやタブレットでご利用の場合はアプリをダウンロードしてご利用ください。</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+<!-- SmartPhoneSupport end -->              
+            </td>
+          </tr>
+        </tbody>
+      </table><!-- /CONTENT FOOTER -->
+    </td>
+  </tr>
+</table><!-- /CONTENT BODY -->                          <table style="width:100%;">
+  <tbody>
+    <tr>
+      <td style="width:100%; padding:0 22.5px 10px 22.5px; text-align:center;">
+        <img src="https://mail-img.chatwork.com/html_mail/common/img_border_bottom.png?1759456030">
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- CONTENT FOOTER -->
+<table style="width:100%;">
+  <tr>
+    <td style="width:100%; padding:0 8.333333% 2.5em; vertical-align:top; background-color:#ffffff;">
+      <table>
+        <tbody>
+          <tr>
+            <td style="padding:0;">
+                            <p style="margin-bottom:.625em; font-size:16px; line-height:1.5;">
+                何かご不明な点がありましたら、下記の「よくある質問」をご覧ください。
+              </p>
+              <p><a href="https://ecw-relay-v2.chatwork.com/ls/click?upn=u001.DLgXZiZ-2Fo9s1RVgzQf60Y1CYVxCgPYGao0-2BBkcYcf-2F6g2pbwO4b0wUR9eHUlHGcNBC7Y_Za7T4v61EGHK-2BmWbBNOBf-2BAHpzs7ZJQxZPNga4TeD42BUZy-2Bqa2lINXIvqs4bUWWUdi-2F-2F957qlilfYRGHmxOReKVbZPyaCj-2BlslLt3T-2BD7Jep-2B9J6zMzzeRja47iOnKzI7AJjueWnIvLzjGYJRjCQNIGF-2BwI8BYoVzDlJP0DDjaUQjXo0-2FmMaZRr7PzBi8yUU3R3RgTBovM-2FBH4VOTnY0Lj99u98BEOtFN7frNGYZNGI9T8feD5tsDxjYK2younE" target="_blank" style="color:#0ea5f3; font-size:16px;">Chatwork - よくある質問</a></p>
+                            <p style="font-size:16px;">
+                Chatwork - ご利用ガイド（PDF）をダウンロードする<br />
+                <a href="https://ecw-relay-v2.chatwork.com/ls/click?upn=u001.DLgXZiZ-2Fo9s1RVgzQf60Y-2BGt62P-2B4WMeNYnGGey-2FB5c2LMdrhOKV2nyUI5KfdAnHmBYC_Za7T4v61EGHK-2BmWbBNOBf-2BAHpzs7ZJQxZPNga4TeD42BUZy-2Bqa2lINXIvqs4bUWWUdi-2F-2F957qlilfYRGHmxORVa95uuHbFWR7yL22M3bwh30YDLL-2FgBMKf0HZLtSCI-2Bn-2FutOtvIg-2FS42HH-2BljDetUu2np7MytFicnzv2wb8J0BxsvI2hNS8xtV7lPd2VTF3KA4fs0ZiNB1ZwlwgLi6aIOzW4tvpNpP5dbB95Zr6OcYM0jKtq8WVmfz-2FV0RpxX8Q-2F" target="_blank" style="color:#0ea5f3; font-size:16px;">https://l.chatwork.com/h_guide_ja</a>
+              </p>
+                          </td>
+          </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+</table><!-- /CONTENT FOOTER -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- FOOTER CONTENT -->
+                  <table class="row">
+  <tr>
+    <td>
+      <!-- ASIDE CONTENT -->
+      <table class="row">
+        <tbody>
+          <tr>
+            <td style="padding:0 0 40px;">
+              <!-- NOTICE -->
+              <p style="margin-bottom:10px; padding-top:1em; font-size:.875em; line-height:1.4">
+                                   今後ともChatworkをどうぞよろしくお願いいたします。<br />
+                                                ※このメールアドレスは送信専用です。返信はおこなっておりません。<br />
+                              </p><!-- /NOTICE -->
+            </td>
+          </tr>
+        </tbody>
+      </table><!-- /ASIDE CONTENT -->
+    </td>
+  </tr>
+</table>
+<table class="row">
+  <tr>
+    <td style="padding:1em 0; background-color:#34362f;">
+      <!-- FOOTER -->
+      <table class="footer">
+        <tr>
+          <td>
+            <!-- FOOTER LINK -->
+            <table style="width:100%;">
+              <tbody>
+                <tr>
+                  <td style="width:100%; vertical-align:top; background-color:#34362f;">
+                    <table style="width:100%; table-layout:fixed;">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <p style="width:100%; text-align:center;">
+                              <a href="https://ecw-relay-v2.chatwork.com/ls/click?upn=u001.DLgXZiZ-2Fo9s1RVgzQf60Y8Cru36KGAfZ0HhXKAcix-2Fo-3D97K6_Za7T4v61EGHK-2BmWbBNOBf-2BAHpzs7ZJQxZPNga4TeD42BUZy-2Bqa2lINXIvqs4bUWWUdi-2F-2F957qlilfYRGHmxORYcf-2BWd0Lh6vG0wSIfVZeyT9UTCYaNqXvUBLQ2WVEELsEdrGvFMq9kRn3Qru6-2BARWkzlAXZIRTd2dsiSaw3uYqJmyMkhQyG71y9NsDu9wJVnXaugah5jjC-2Bgle09XLDOPuSEuUJNwn0xfoyWeX3zq1S5h0IvOHOMNNwNzsQMaKgV" style="color:#afada0; font-size:.875em; text-decoration:underline;">株式会社kubell</a>
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table><!-- /FOOTER LINK -->
+          </td>
+        </tr>
+      </table><!-- /FOOTER -->
+    </td>
+  </tr>
+</table><!-- /FOOTER CONTENT -->                </td>
+              </tr>
+            </tbody>
+          </table>
+        </center>
+      </td>
+    </tr>
+  </table>
+<img src="https://ecw-relay-v2.chatwork.com/wf/open?upn=u001.RxBrF4B-2BPD0sz5ME-2BhHbDh7jeJvS-2F5mWeE0-2BS-2FydxWT3jAwkkFmubcQi65EmfUukP7q86HHKisIMX1lWSxHN5-2FNIUfPnhRUdCx0ju5hMlvEtv3RY53SXgRCcpdH4KjqkCiGel0J8js0TTw44c3Ond-2FzYhWDhu5kS0AxGspNBTqydWjcJ5JekzBkZntG6SA1Sq2gI-2FaMk5edzm3c9DZ0bPWc0HC0ggoRGoS0tr6MkLMUOx35-2BbYYjAVN9RAeafTxf" alt="" width="1" height="1" border="0" style="height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;"/></body>
+</html>
+
+
+
+--b1_5618c420b5bd635b53ebf3b177547959--
+

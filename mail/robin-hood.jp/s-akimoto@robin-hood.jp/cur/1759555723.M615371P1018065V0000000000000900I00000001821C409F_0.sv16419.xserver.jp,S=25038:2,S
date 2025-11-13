@@ -1,0 +1,449 @@
+Return-Path: <s-akimoto@chikaramochi.com>
+Delivered-To: s-akimoto@robin-hood.jp
+X-Virus-Status: scanned (With Secure/Atlant/virusgw16021.xserver.jp/)
+Received: from mwb-ckd-mts-012c11.ocn.ad.jp (mwb-ckd-mts-012c11.ocn.ad.jp [210.227.231.12])
+	by sv16419.xserver.jp (Postfix) with ESMTPS id 83DEB3F5A9051
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 14:28:43 +0900 (JST)
+Authentication-Results: sv16419.xserver.jp;
+	dkim=pass header.d=chikaramochi.com header.s=bizmw header.b=KBoNpy0B;
+	dmarc=pass (policy=none) header.from=chikaramochi.com;
+	spf=pass (sv16419.xserver.jp: domain of s-akimoto@chikaramochi.com designates 210.227.231.12 as permitted sender) smtp.mailfrom=s-akimoto@chikaramochi.com;
+	arc=pass ("bizmw.com:s=default:i=1")
+ARC-Seal: i=2; s=default; d=robin-hood.jp; t=1759555723; a=rsa-sha256;
+	cv=pass;
+	b=axHpwZBX5326QIJIt9ow6W/HHSG7Eyma3AX26bvvFaKW4ofUK12HuHptmq+y8Hh5EwEa5K
+	2yKCogfQxQK6J1vydNHvj+YDujH/rovstTAQ+jfajMV5I2rHe22DruCHKiy7j5rLRfjyBn
+	xTpHmdSyR4jBv224UMXjQNTIfUgZ5jLUUvRQ6Ng9vIDIbofhDB+QkDCyfuVfE5kA280FF1
+	wJY2oY2CJQwLli1HcR35NY4vl2t4hjhcV4LhVRLBppCvwMgznEsU8VwhqfmpSp7v3zRLYn
+	V1YWFcyMbBGAZIBGQhydVCcfmBBqMoATd7EQf+oksOYEhKXyxy8er5iLR39CKw==
+ARC-Authentication-Results: i=2;
+	sv16419.xserver.jp;
+	dkim=pass header.d=chikaramochi.com header.s=bizmw header.b=KBoNpy0B;
+	dmarc=pass (policy=none) header.from=chikaramochi.com;
+	spf=pass (sv16419.xserver.jp: domain of s-akimoto@chikaramochi.com designates 210.227.231.12 as permitted sender) smtp.mailfrom=s-akimoto@chikaramochi.com;
+	arc=pass ("bizmw.com:s=default:i=1")
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=robin-hood.jp;
+	s=default; t=1759555723;
+	h=from:from:sender:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:in-reply-to:
+	 references:references:dkim-signature;
+	bh=03D0/7LYoZMfwsYafF75s1d9PIq1CNigCsV6jMhrfKI=;
+	b=CoXCfsiB1yfTh/dTtRtOLg1JQLqNWJhgj2uafUT/mNg56fWxYyWrvGdGgzxFr6zMW+lo81
+	9hWg7hCUmq+e82/Z1tAaHszcTKDqWGyIYQI2mUzd397pO76g/NsrzW+xWTfpPaF8iQ+zoS
+	qf3YY8d8JM33noPijLxNuLdpeXmuy/PIC1IAUSji9fipDn6H86rkKFoHgnRPSTY3xqn1QI
+	K6c2RiYzo1I8YuPGisSbvhJOPL9uPcCANWAsPtPwd9H3gQ7CsX/yGIkPxxKuRW9kfo16O3
+	mT0x7XnxOkpUFu+Lq8Zmmw7A+tshV398JYUdWhYhPgUVA5xJdkNwqLdZ7nb/2A==
+Received: from cmn-spm-mts-007c1.ocn.ad.jp (cmn-spm-mts-007c1.ocn.ad.jp [153.153.67.163])
+	by mwb-ckd-mts-012c11.ocn.ad.jp (Postfix) with ESMTP id 635BD18001650
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 14:28:43 +0900 (JST)
+Received: from mwb-vc-mts-001c1.ocn.ad.jp ([153.138.237.203])
+	by cmn-spm-mts-007c1.ocn.ad.jp with ESMTP
+	id 4up1vd7NT4IXp4up1vfX9C; Sat, 04 Oct 2025 14:28:43 +0900
+X-BIZ-RELAY: yes
+Received: from mwb-sdgw-mts-006c1.ocn.ad.jp ([210.145.253.206])
+	by mwb-vc-mts-001c1.ocn.ad.jp with ESMTP
+	id 4up1vVgVF2WcP4up1vhbZ6; Sat, 04 Oct 2025 14:28:43 +0900
+Received: from chikaramochi.com (chikaramochi.com [60.43.220.58])
+	by mwb-sdgw-mts-006c1.ocn.ad.jp (Postfix) with ESMTP id 1585D14000085
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 14:28:43 +0900 (JST)
+Received: from smtpclient.apple (p3212151-ipoe.ipoe.ocn.ne.jp [122.16.9.150])
+	by chikaramochi.com (Postfix) with ESMTPA id AEE6513A3076
+	for <s-akimoto@robin-hood.jp>; Sat,  4 Oct 2025 14:28:42 +0900 (JST)
+ARC-Seal: i=1; a=rsa-sha256; d=bizmw.com; s=default; t=1759555723; cv=none;
+	b=laA/DFmdNlFX7GG+3ujYHScHIvL6pLCECKkSPwqnH/Nf9QpkMGwFfZlynzuqzcM8+BAEsZtiyT8GBK5i9kTfeKwdIZidzNTEh5kN22OfPrIh0lcJKUMJo+uLgu9tZpmsBadoNmmXtngW9i8MxS9N66QC8t6uAqpyaFfzq4PhicE=
+ARC-Message-Signature: i=1; a=rsa-sha256; d=bizmw.com; s=default;
+	t=1759555723; c=relaxed/relaxed;
+	bh=03D0/7LYoZMfwsYafF75s1d9PIq1CNigCsV6jMhrfKI=;
+	h=DKIM-Signature:From:Mime-Version:Date:Subject:Message-Id:To; b=mByQFml7OcRx6/el0JI/2TqAkw/j71oZ2cnlygNX1hDMjOzk/8xWPeYyolMqcX3nOyL4OL34vZwAPz6gJrNB/WltOWow6EGWS3ZSP3dx4/5NBSORkhgGZxMGD9A7ECgweu2XXsYyIoZ8M4rDI2e5fa31zkRiJGfo+0QwNLt6nEQ=
+ARC-Authentication-Results: i=1; chikaramochi.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chikaramochi.com;
+	s=bizmw; t=1759555722;
+	bh=03D0/7LYoZMfwsYafF75s1d9PIq1CNigCsV6jMhrfKI=;
+	h=From:Date:Subject:References:To:From;
+	b=KBoNpy0BaMzqE4a+H20MXP5j5i/zWIR8tgAt2hOxErlkuEz8k2sAInPEYA4suIFcj
+	 Pfn4LAinH39pl2MzYkurQ00CQdvHStVnhlSKQkr5FIWDHsIgyMUg47vbvxQJVdl4TP
+	 tokR0kVw8wtqcqpW2cMp3Ags/AFeis4zfcM+NOIQ=
+Content-Type: multipart/alternative; boundary=Apple-Mail-49B8F107-0CD8-44FF-AAEA-639CC376E1BF
+Content-Transfer-Encoding: 7bit
+From: SHUTARO AKIMOTO <s-akimoto@chikaramochi.com>
+Mime-Version: 1.0 (1.0)
+Date: Sat, 4 Oct 2025 14:28:32 +0900
+Subject: =?utf-8?B?RndkOiDjgJDlho3pgIHjgJHjg63jgrTjg4fjg7zjgr/pgIHku5g=?=
+ =?utf-8?B?44GV44Gb44Gm44GE44Gf44Gg44GN44G+44GZ?=
+Message-Id: <D606C6C8-554A-4B18-B7B9-74E404E6A92D@chikaramochi.com>
+References: <TYRP301MB12664AE4E133A29283883D91F912A@TYRP301MB1266.JPNP301.PROD.OUTLOOK.COM>
+To: s-akimoto@robin-hood.jp
+X-Mailer: iPhone Mail (22G100)
+XSRV-Filter: s-akimoto@robin-hood.jp
+
+
+--Apple-Mail-49B8F107-0CD8-44FF-AAEA-639CC376E1BF
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><br id=3D"lineBreakAtBeginningOfSignature">=
+<div dir=3D"ltr"><div>=E8=8F=B1=E7=A7=8B=E6=9C=A8=E6=9D=90=E6=A0=AA=E5=BC=8F=
+=E4=BC=9A=E7=A4=BE</div><div>Hishiaki Mokuzai Co.,Ltd</div><div>=E7=A7=8B=E5=
+=85=83=E3=80=80=E7=A7=80=E5=A4=AA=E9=83=8E</div><div>Shutaro Akimoto</div><d=
+iv><br></div><div><br></div></div><div dir=3D"ltr"><br>=E8=BB=A2=E9=80=81=E3=
+=81=95=E3=82=8C=E3=81=9F=E3=83=A1=E3=83=83=E3=82=BB=E3=83=BC=E3=82=B8:<br><b=
+r></div><blockquote type=3D"cite"><div dir=3D"ltr"><b>=E5=B7=AE=E5=87=BA=E4=BA=
+=BA:</b> harumi@dot-pc.com<br><b>=E6=97=A5=E6=99=82:</b> 2025=E5=B9=B49=E6=9C=
+=8822=E6=97=A5 17:11:09 JST<br><b>=E5=AE=9B=E5=85=88:</b> s-akimoto@chikaram=
+ochi.com<br><b>Cc:</b> =E3=81=A9=E3=81=A3=E3=81=A8WEB &lt;support@dot-pc.com=
+&gt;<br><b>=E4=BB=B6=E5=90=8D:</b> <b>Re: =E3=80=90=E5=86=8D=E9=80=81=E3=80=91=
+=E3=83=AD=E3=82=B4=E3=83=87=E3=83=BC=E3=82=BF=E9=80=81=E4=BB=98=E3=81=95=E3=81=
+=9B=E3=81=A6=E3=81=84=E3=81=9F=E3=81=A0=E3=81=8D=E3=81=BE=E3=81=99</b><br><b=
+r></div></blockquote><blockquote type=3D"cite"><div dir=3D"ltr">=EF=BB=BF
+
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-2022-j=
+p">
+
+
+<div dir=3D"ltr" style=3D"font-family: Aptos, Arial, Helvetica, sans-serif; f=
+ont-size: 12pt; color: black;">
+=E6=9C=89=E9=99=90=E4=BC=9A=E7=A4=BE =E5=B1=B1=E5=86=85=E8=87=AA=E5=8B=95=E8=
+=BB=8A=E5=95=86=E4=BC=9A</div>
+<div id=3D"mail-editor-reference-message-container" style=3D"color: inherit;=
+ background-color: inherit;">
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<span style=3D"background-color: rgb(255, 255, 255);">=E7=A7=8B=E5=85=83 =E6=
+=A7=98</span></div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<span style=3D"background-color: rgb(255, 255, 255);"><br>
+</span></div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+=E3=81=8A=E4=B8=96=E8=A9=B1=E3=81=AB=E3=81=AA=E3=81=A3=E3=81=A6=E3=81=8A=E3=82=
+=8A=E3=81=BE=E3=81=99=E3=80=82</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+=E3=81=A9=E3=81=A3=E3=81=A8WEB =E6=9F=B3=E4=B8=8B=E3=81=A7=E3=81=94=E3=81=96=
+=E3=81=84=E3=81=BE=E3=81=99=E3=80=82</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+=E3=83=AD=E3=82=B4=E3=83=87=E3=83=BC=E3=82=BF=E3=81=AB=E3=81=A4=E3=81=84=E3=81=
+=A6=E3=80=81=E3=81=8A=E9=80=81=E3=82=8A=E3=81=A7=E3=81=8D=E3=81=A6=E3=81=84=E3=
+=81=AA=E3=81=84=E3=81=A8=E5=B0=8F=E9=A4=A8=E3=82=88=E3=82=8A=E4=BC=BA=E3=81=84=
+=E3=81=BE=E3=81=97=E3=81=9F=E3=80=82</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+=E6=94=B9=E3=82=81=E3=81=A6=E3=81=8A=E9=80=81=E3=82=8A=E3=81=95=E3=81=9B=E3=81=
+=A6=E3=81=84=E3=81=9F=E3=81=A0=E3=81=8D=E3=81=BE=E3=81=99=E3=80=82</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: -apple-system, BlinkMacSystemFont, &quot;.SFNSDisplay-R=
+egular&quot;, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, &quot;Hiragi=
+no Sans&quot;, =E3=83=92=E3=83=A9=E3=82=AE=E3=83=8E=E8=A7=92=E3=82=B4=E3=82=B7=
+=E3=83=83=E3=82=AF, &quot;Hiragino Kaku Gothic ProN&quot;, &quot;=E3=83=92=E3=
+=83=A9=E3=82=AE=E3=83=8E=E8=A7=92=E3=82=B4  ProN W3&quot;, Meiryo, =E3=83=A1=
+=E3=82=A4=E3=83=AA=E3=82=AA, &quot;MS PGothic&quot;, &quot;=EF=BC=AD=EF=BC=B3=
+  =EF=BC=B0=E3=82=B4=E3=82=B7=E3=83=83=E3=82=AF&quot;, sans-serif; font-size=
+: 13px; color: rgb(0, 134, 240);">
+<u><a href=3D"https://bd956404.xdrive.jp/index.php/s/4ZtLk8dzED4Haw5" data-o=
+utlook-id=3D"e69b6121-7635-4cd1-93a6-3dc65b3b5eac" style=3D"color: rgb(0, 13=
+4, 240);">https://bd956404.xdrive.jp/index.php/s/4ZtLk8dzED4Haw5</a></u></di=
+v>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+=E4=BD=95=E5=8D=92=E3=81=94=E7=A2=BA=E8=AA=8D=E3=81=AE=E7=A8=8B=E5=AE=9C=E3=81=
+=97=E3=81=8F=E3=81=8A=E9=A1=98=E3=81=84=E3=81=84=E3=81=9F=E3=81=97=E3=81=BE=E3=
+=81=99=E3=80=82</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+<br>
+</div>
+<div id=3D"ms-outlook-mobile-signature" style=3D"color: inherit; background-=
+color: inherit;">
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; font-family: &quot=
+;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0);">
+=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-</p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; font-family: &quot=
+;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0);">
+=E3=80=80=E6=A0=AA=E5=BC=8F=E4=BC=9A=E7=A4=BE=E3=81=A9=E3=81=A3=E3=81=A8WEB<=
+/p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; font-family: &quot=
+;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0);">
+=E3=80=80=E6=9F=B3=E4=B8=8B=E3=80=80=E6=99=B4=E7=BE=8E=E3=80=80=E3=80=80Haru=
+mi Yagishita</p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; min-height: 15px; f=
+ont-family: &quot;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0)=
+;">
+<br>
+</p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; font-family: &quot=
+;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0);">
+=E3=80=80=E3=80=92011-0945<br>
+=E3=80=80=E7=A7=8B=E7=94=B0=E5=B8=82=E5=9C=9F=E5=B4=8E=E6=B8=AF=E8=A5=BF1=E4=
+=B8=81=E7=9B=AE10-45<br>
+=E3=80=80=E7=A7=8B=E7=94=B0=E3=83=99=E3=82=A4=E3=83=91=E3=83=A9=E3=83=80=E3=82=
+=A4=E3=82=B9 2F</p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; font-family: &quot=
+;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0);">
+=E3=80=80URL=EF=BC=9A<span style=3D"color: rgb(0, 134, 240);"><u><a href=3D"=
+http://dot-pc.com/" title=3D"http://dot-pc.com/" data-outlook-id=3D"fc4d19c3=
+-0811-4f9f-be53-e01a265e2861" data-ogsc=3D"" style=3D"color: rgb(0, 134, 240=
+); margin-top: 0px; margin-bottom: 0px;">http://dot-pc.com/</a></u></span></=
+p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; font-family: &quot=
+;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0);">
+=E3=80=80mail=EF=BC=9A<span style=3D"color: rgb(0, 134, 240);"><u><a href=3D=
+"mailto:support@dot-pc.com" title=3D"mailto:support@dot-pc.com" data-outlook=
+-id=3D"f5e72f7e-cee6-40c8-8104-86a5d65f4f6b" data-ogsc=3D"" style=3D"color: r=
+gb(0, 134, 240); margin-top: 0px; margin-bottom: 0px;">support@dot-pc.com</a=
+></u></span></p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; font-family: &quot=
+;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0);">
+=E3=80=80TEL =EF=BC=9A 018-838-4775</p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; font-family: &quot=
+;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0);">
+=E3=80=80FAX =EF=BC=9A 018-853-4802</p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; min-height: 15px; f=
+ont-family: &quot;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0)=
+;">
+<br>
+</p>
+<p dir=3D"ltr" style=3D"line-height: normal; margin: 0px; font-family: &quot=
+;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 0, 0);">
+=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-</p>
+<div dir=3D"ltr"><br>
+</div>
+<div dir=3D"ltr"><br>
+</div>
+</div>
+<div id=3D"mail-editor-reference-message-container" style=3D"color: inherit;=
+ background-color: inherit;">
+<div class=3D"ms-outlook-mobile-reference-message skipProofing" style=3D"tex=
+t-align: left; padding: 3pt 0in 0in; border-width: 1pt medium medium; border=
+-style: solid none none; border-color: rgb(181, 196, 223) currentcolor curre=
+ntcolor; font-family: Aptos; font-size: 12pt; color: black;">
+<b>=E5=B7=AE=E5=87=BA=E4=BA=BA: </b>harumi@dot-pc.com &lt;harumi@dot-pc.com&=
+gt;<br>
+<b>=E6=97=A5=E4=BB=98: </b>=E6=9C=A8=E6=9B=9C=E6=97=A5, 2025=E5=B9=B49=E6=9C=
+=8818=E6=97=A5 8:02<br>
+<b>=E5=AE=9B=E5=85=88: s-akimoto@chikaramochi.com</b><br>
+<b>CC: </b>'=E3=81=A9=E3=81=A3=E3=81=A8WEB' &lt;support@dot-pc.com&gt;<br>
+<b>=E4=BB=B6=E5=90=8D: </b>=E3=83=AD=E3=82=B4=E3=83=87=E3=83=BC=E3=82=BF=E9=80=
+=81=E4=BB=98=E3=81=95=E3=81=9B=E3=81=A6=E3=81=84=E3=81=9F=E3=81=A0=E3=81=8D=E3=
+=81=BE=E3=81=99<br>
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<span style=3D"background-color: rgb(255, 255, 255);">=E6=9C=89=E9=99=90=E4=BC=
+=9A=E7=A4=BE =E5=B1=B1=E5=86=85=E8=87=AA=E5=8B=95=E8=BB=8A=E5=95=86=E4=BC=9A=
+</span></div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+=E7=A7=8B=E5=85=83 =E6=A7=98</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+=E3=81=8A=E4=B8=96=E8=A9=B1=E3=81=AB=E3=81=AA=E3=81=A3=E3=81=A6=E3=81=8A=E3=82=
+=8A=E3=81=BE=E3=81=99=E3=80=82</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+=E6=98=A8=E6=97=A5=E3=81=AE=E3=81=8A=E6=89=93=E3=81=A1=E5=90=88=E3=82=8F=E3=81=
+=9B=E3=81=A7=E3=81=AF=E3=81=82=E3=82=8A=E3=81=8C=E3=81=A8=E3=81=86=E3=81=94=E3=
+=81=96=E3=81=84=E3=81=BE=E3=81=97=E3=81=9F=E3=80=82</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+=E3=83=AD=E3=82=B4=E3=83=87=E3=83=BC=E3=82=BF=E3=82=92=E3=81=8A=E9=80=81=E3=82=
+=8A=E3=81=95=E3=81=9B=E3=81=A6=E3=81=84=E3=81=9F=E3=81=A0=E3=81=8D=E3=81=BE=E3=
+=81=99=E3=80=82</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: -apple-system, BlinkMacSystemFont, &quot;.SFNSDisplay-Regu=
+lar&quot;, &quot;Segoe UI&quot;, &quot;Helvetica Neue&quot;, &quot;Hiragino S=
+ans&quot;, =E3=83=92=E3=83=A9=E3=82=AE=E3=83=8E=E8=A7=92=E3=82=B4=E3=82=B7=E3=
+=83=83=E3=82=AF, &quot;Hiragino Kaku Gothic ProN&quot;, &quot;=E3=83=92=E3=83=
+=A9=E3=82=AE=E3=83=8E=E8=A7=92=E3=82=B4  ProN W3&quot;, Meiryo, =E3=83=A1=E3=
+=82=A4=E3=83=AA=E3=82=AA, &quot;MS PGothic&quot;, &quot;=EF=BC=AD=EF=BC=B3  =EF=
+=BC=B0=E3=82=B4=E3=82=B7=E3=83=83=E3=82=AF&quot;, sans-serif; font-size: 13p=
+x; color: rgb(0, 134, 240);">
+<u><a href=3D"https://bd956404.xdrive.jp/index.php/s/4ZtLk8dzED4Haw5" data-o=
+utlook-id=3D"e69b6121-7635-4cd1-93a6-3dc65b3b5eac" style=3D"color: rgb(0, 13=
+4, 240);">https://bd956404.xdrive.jp/index.php/s/4ZtLk8dzED4Haw5</a></u></di=
+v>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+=E4=BD=95=E5=8D=92=E3=81=94=E7=A2=BA=E8=AA=8D=E3=81=AE=E7=A8=8B=E3=82=88=E3=82=
+=8D=E3=81=97=E3=81=8F=E3=81=8A=E9=A1=98=E3=81=84=E3=81=84=E3=81=9F=E3=81=97=E3=
+=81=BE=E3=81=99=E3=80=82</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"text-align: left; text-indent: 0px; background-color: rgb(255, 255, 2=
+55); font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+<br>
+</div>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);">=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D=
+-=3D-=3D-</span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);">=E3=80=80=E6=A0=AA=E5=BC=8F=E4=BC=9A=E7=A4=BE=E3=81=A9=E3=
+=81=A3=E3=81=A8WEB</span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);">=E3=80=80=E6=9F=B3=E4=B8=8B=E3=80=80=E6=99=B4=E7=BE=8E=E3=
+=80=80=E3=80=80Harumi Yagishita</span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px; min-height: 15px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);"><br>
+</span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);">=E3=80=80=E3=80=92011-0945<br>
+=E3=80=80=E7=A7=8B=E7=94=B0=E5=B8=82=E5=9C=9F=E5=B4=8E=E6=B8=AF=E8=A5=BF1=E4=
+=B8=81=E7=9B=AE10-45<br>
+=E3=80=80=E7=A7=8B=E7=94=B0=E3=83=99=E3=82=A4=E3=83=91=E3=83=A9=E3=83=80=E3=82=
+=A4=E3=82=B9 2F</span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);">=E3=80=80URL=EF=BC=9A</span><span style=3D"font-family: &=
+quot;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 134, 240);"><u><a h=
+ref=3D"http://dot-pc.com/" title=3D"http://dot-pc.com/" data-outlook-id=3D"f=
+c4d19c3-0811-4f9f-be53-e01a265e2861" data-ogsc=3D"" style=3D"color: rgb(0, 1=
+34, 240); margin-top: 0px; margin-bottom: 0px;">http://dot-pc.com/</a></u></=
+span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);">=E3=80=80mail=EF=BC=9A</span><span style=3D"font-family: &=
+quot;Helvetica Neue&quot;; font-size: 13px; color: rgb(0, 134, 240);"><u><a h=
+ref=3D"mailto:support@dot-pc.com" title=3D"mailto:support@dot-pc.com" data-o=
+utlook-id=3D"f5e72f7e-cee6-40c8-8104-86a5d65f4f6b" data-ogsc=3D"" style=3D"c=
+olor: rgb(0, 134, 240); margin-top: 0px; margin-bottom: 0px;">support@dot-pc=
+.com</a></u></span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);">=E3=80=80TEL =EF=BC=9A 018-838-4775</span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);">=E3=80=80FAX =EF=BC=9A 018-853-4802</span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px; min-height: 15px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);"><br>
+</span></p>
+<p dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" st=
+yle=3D"text-align: left; text-indent: 0px; line-height: normal; background-c=
+olor: rgb(255, 255, 255); margin: 0px;">
+<span style=3D"font-family: &quot;Helvetica Neue&quot;; font-size: 13px; col=
+or: rgb(0, 0, 0);">=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D=
+-=3D-=3D-</span></p>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<br>
+</div>
+<div dir=3D"ltr" class=3D"ms-outlook-mobile-reference-message skipProofing" s=
+tyle=3D"font-family: Aptos, Arial, Helvetica, sans-serif; font-size: 12pt;">=
+
+<br>
+</div>
+<div id=3D"mail-editor-reference-message-container" dir=3D"ltr" style=3D"col=
+or: inherit; background-color: inherit;">
+<div id=3D"ms-outlook-mobile-signature" dir=3D"ltr" style=3D"color: inherit;=
+ background-color: inherit;">
+</div>
+</div>
+</div>
+</div>
+
+
+</div></blockquote></body></html>=
+
+--Apple-Mail-49B8F107-0CD8-44FF-AAEA-639CC376E1BF--
